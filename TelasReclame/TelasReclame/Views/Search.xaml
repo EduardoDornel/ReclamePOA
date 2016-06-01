@@ -13,24 +13,24 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Border BorderThickness="0,0,0,0.4" BorderBrush="GreenYellow">
         <Grid Background="GreenYellow">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <AutoSuggestBox x:Name="SearchBar"                            
-                            PlaceholderText="Busque..." Style="{StaticResource SearchBox}"                                                                                    
-                            >
-            </AutoSuggestBox>
-            <Button x:Name="SearchButton"
+                            PlaceholderText="Busque..." Style="{StaticResource SearchBox}" />
+                <Button x:Name="SearchButton"
                     Grid.Column="1"
                     FontFamily="Segoe MDL2 Assets"
                     Content="&#xE721;"
                     Width="52"
-                    Height="52"                                        
+                    Height="52"                       
                     Background="Transparent"
                     RelativePanel.AlignRightWithPanel="True"                    
                     />
-        </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

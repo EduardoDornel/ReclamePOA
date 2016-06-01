@@ -1,0 +1,59 @@
+﻿<Page
+    x:Class="TelasReclame.Views.AddComplaint"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TelasReclame.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <RelativePanel x:Name="TopBar"
+                       Background="GreenYellow"
+                       Height="52">
+            <TextBlock x:Name="PageName"
+                       FontSize="24"
+                       Text="Adicionar Reclamação"                       
+                       RelativePanel.AlignVerticalCenterWithPanel="True"
+                       Padding="20,0,0,0"/>
+        </RelativePanel>
+
+        <!--Content-->
+        <ScrollViewer Grid.Row="1">
+            <RelativePanel ScrollViewer.VerticalScrollMode="Auto">
+                <ComboBox x:Name="CategoryList"
+                          Header="Categoria"
+                          Width="230" Margin="12,12,0,0"/>
+                <ComboBox x:Name="BairroList" Header="Bairro"
+                          Width="230" Margin="12,12,0,0"
+                          RelativePanel.Below="CategoryList"/>
+                <TextBox x:Name="AddressTexBox" Header="Endereco"
+                         Margin="12,12,12,0" Width="320"
+                         RelativePanel.Below="BairroList"/>
+                <TextBox x:Name="DescricaoTextBox" Header="Descrição"
+                         TextWrapping="Wrap"                         
+                         Margin="12,12,12,0" Width="320"
+                         RelativePanel.Below="AddressTexBox"
+                         MaxLength="300"
+                         />
+                <TextBlock x:Name="LabelImageSelect" Text="Imagem" Margin="12"
+                           RelativePanel.Below="DescricaoTextBox"/>
+                <Button x:Name="ImagePickerButton" Height="32"  Content="Adicionar Existente" Margin="12,0" RelativePanel.Below="LabelImageSelect"/>
+                <Button x:Name="CameraPickerButton"
+                        FontFamily="Segoe MDL2 Assets" Content="&#xE114;"
+                        Height="32"
+                        RelativePanel.RightOf="ImagePickerButton" RelativePanel.AlignVerticalCenterWith="ImagePickerButton"/>
+            </RelativePanel>
+        </ScrollViewer>
+        <CommandBar Grid.Row="2">
+            <AppBarButton Icon="Cancel" Label="Cancelar"/>
+            <AppBarButton Icon="Accept" Label="Confirmar" Click="AppBarButton_Click"/>
+        </CommandBar>
+    </Grid>
+</Page>

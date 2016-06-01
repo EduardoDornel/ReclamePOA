@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="TelasReclame.Views.Main"
+    x:Class="TelasReclame.Views.Home"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TelasReclame.Views"
@@ -36,7 +36,7 @@
         
         <!--Content-->
         <ScrollViewer Grid.Row="1">
-            <ListBox/>
+            <ListBox ScrollViewer.VerticalScrollMode="Auto"/>
         </ScrollViewer>
         
         <!--Bottom-->
@@ -45,7 +45,8 @@
                     ClosedDisplayMode="Compact"
                     >
             <AppBarButton Icon="Add"
-                          Label="Nova Reclamação"/>
+                          Label="Nova Reclamação"
+                          Click="AppBarButton_Click"/>
         </CommandBar>
     </Grid>
 </Page>

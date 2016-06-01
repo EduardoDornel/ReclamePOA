@@ -20,26 +20,11 @@ namespace TelasReclame.Views
     /// <summary>
     /// Uma página vazia que pode ser usada isoladamente ou navegada dentro de um Quadro.
     /// </summary>
-    public sealed partial class Shell : Page
+    public sealed partial class ViewComplaint : Page
     {
-        public Shell()
+        public ViewComplaint()
         {
             this.InitializeComponent();
-            PageFrame.Navigate(typeof(Home));            
-            HamburgerItemHome.IsSelected = true;
-        }
-
-        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
-        {
-            HamburgerSplitView.IsPaneOpen = !HamburgerSplitView.IsPaneOpen;
-        }
-
-        private void HamburgerList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (HamburgerList.SelectedItem.Equals(HamburgerItemHome))
-                PageFrame.Navigate(typeof(Home));
-            else if (HamburgerList.SelectedItem.Equals(HamburgerItemProfile))
-                PageFrame.Navigate(typeof(Profile));
         }
     }
 }
