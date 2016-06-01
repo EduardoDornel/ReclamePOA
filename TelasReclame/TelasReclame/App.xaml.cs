@@ -73,7 +73,7 @@ namespace TelasReclame
                     // Quando a pilha de navegação não for restaurada, navegar para a primeira página,
                     // configurando a nova página passando as informações necessárias como um parâmetro
                     // parâmetro
-                    rootFrame.Navigate(typeof(Views.Main), e.Arguments);
+                    rootFrame.Navigate(typeof(Views.Shell), e.Arguments);
                 }
                 // Verifique se a janela atual está ativa
                 Window.Current.Activate();

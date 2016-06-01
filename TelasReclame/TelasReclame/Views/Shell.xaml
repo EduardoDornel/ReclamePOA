@@ -8,61 +8,54 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <RelativePanel x:Name="HamburgerTopBar"        
-                       Background="GreenYellow"
-                       Height="52">
-            <Button x:Name="HamburgerButton"
-                                Width="52"
-                                Height="52"
-                                FontFamily="Segoe MDL2 Assets"
-                                Content="&#xE700;"
-                                Click="HamburgerButton_Click" />
-            <TextBlock x:Name="PageName"
-                       FontSize="24"                                             
-                       RelativePanel.RightOf="HamburgerButton"
-                       RelativePanel.AlignVerticalCenterWithPanel="True"                       
-                       Padding="20,0,0,0" />
-        </RelativePanel>
         <SplitView x:Name="HamburgerSplitView"                         
                    Grid.Row="1"
                    OpenPaneLength="200"
                    CompactPaneLength="52"
                    DisplayMode="CompactOverlay">
             <SplitView.Pane>
-                <ListView x:Name="HamburgerList" Background="GreenYellow">
-                    <ListViewItem x:Name="HamburgerItemHome" Padding="0">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"                                       
-                                       Text="&#xE10F;"
-                                       FontSize="16"
-                                       Foreground="{ThemeResource ButtonForegroundThemeBrush}"
-                                       Padding="18"
-                                       />
-                            <TextBlock Text="Início"
-                                       VerticalAlignment="Center"
-                                       FontSize="18"
-                                       Padding="12,0,0,0"/>
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem x:Name="HamburgerItemProfile" Padding="0">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"                                       
-                                       Text="&#xE13D;"
-                                       FontSize="16"
-                                       Foreground="{ThemeResource ButtonForegroundThemeBrush}"
-                                       Padding="18"/>
-                            <TextBlock Text="Meu Perfil"
-                                       VerticalAlignment="Center"
-                                       FontSize="18"
-                                       Padding="12,0,0,0"
-                                       />
-                        </StackPanel>
-                    </ListViewItem>
-                </ListView>
+                <Grid Background="GreenYellow">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Button x:Name="HamburgerButton"
+                                Width="52"
+                                Height="52"
+                                FontFamily="Segoe MDL2 Assets"
+                                Content="&#xE700;"
+                                Click="HamburgerButton_Click" />
+                    <ListView x:Name="HamburgerList" Background="Transparent" Grid.Row="1" SelectionChanged="HamburgerList_SelectionChanged">
+                        <ListViewItem x:Name="HamburgerItemHome" Padding="0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets"                                       
+                                           Text="&#xE10F;"
+                                           FontSize="16"
+                                           Foreground="{ThemeResource ButtonForegroundThemeBrush}"
+                                           Padding="18"
+                                           />
+                                <TextBlock Text="Início"
+                                           VerticalAlignment="Center"
+                                           FontSize="18"
+                                           Padding="12,0,0,0"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem x:Name="HamburgerItemProfile" Padding="0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets"                                       
+                                           Text="&#xE13D;"
+                                           FontSize="16"
+                                           Foreground="{ThemeResource ButtonForegroundThemeBrush}"
+                                           Padding="18"/>
+                                <TextBlock Text="Meu Perfil"
+                                           VerticalAlignment="Center"
+                                           FontSize="18"
+                                           Padding="12,0,0,0"
+                                           />
+                            </StackPanel>
+                        </ListViewItem>
+                    </ListView>
+                </Grid>
             </SplitView.Pane>
             <SplitView.Content>
                 <Frame x:Name="PageFrame">
