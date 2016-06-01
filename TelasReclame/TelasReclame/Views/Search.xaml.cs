@@ -20,21 +20,11 @@ namespace TelasReclame.Views
     /// <summary>
     /// Uma página vazia que pode ser usada isoladamente ou navegada dentro de um Quadro.
     /// </summary>
-    public sealed partial class Main : Page
-    {       
-        public Main()
+    public sealed partial class Search : Page
+    {
+        public Search()
         {
-            this.InitializeComponent();            
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-        }        
-
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(Search));
+            this.InitializeComponent();
         }
     }
 }

@@ -15,31 +15,22 @@
         </Grid.RowDefinitions>
 
         <RelativePanel x:Name="TopBar"
-                       Background="{ThemeResource AppBarBackgroundThemeBrush}"
+                       Background="GreenYellow"
                        Height="52">
-
             <TextBlock x:Name="PageName"
                        FontSize="24"
-                       Text="Últimas Reclamações"                       
+                       Text="Início"                       
                        RelativePanel.AlignVerticalCenterWithPanel="True"
                        Padding="20,0,0,0"/>
             <Button x:Name="SearchButton"                                                            
                     FontFamily="Segoe MDL2 Assets"
                     Content="&#xE721;"
                     Width="52"
-                    Height="52"
-                    FontSize="12"
+                    Height="52"                    
                     Click="SearchButton_Click" 
                     Background="Transparent"
-                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"                    
                     />
-            <SearchBox x:Name="SearchBar"
-                            Width="340"                            
-                            Margin="0,0,10,0"
-                            RelativePanel.AlignRightWithPanel="True"
-                            RelativePanel.AlignVerticalCenterWithPanel="True"
-                            Visibility="Collapsed"                                                    
-                            PlaceholderText="Buscar..."/>
         </RelativePanel>
         
         

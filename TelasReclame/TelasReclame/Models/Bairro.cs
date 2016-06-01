@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace TelasReclame.Models
 {
-    public class Usuario
+    public class Bairro
     {        
-        public int UsuarioId { get; set; }
-        public string Email { get; set; }
-        public string Senha { get; set; }
-        public Bairro Bairro { get; set; }        
+        public int BairroId { get; set; }
         public string Nome { get; set; }
     }
 }

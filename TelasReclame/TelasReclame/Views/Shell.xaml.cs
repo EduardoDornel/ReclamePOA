@@ -26,6 +26,8 @@ namespace TelasReclame.Views
         {
             this.InitializeComponent();
             PageFrame.Navigate(typeof(Main));
+            PageName.Text = "Início";
+            HamburgerItemHome.IsSelected = true;
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)

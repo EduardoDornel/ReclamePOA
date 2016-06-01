@@ -21,9 +21,7 @@ namespace TelasReclame
     ///Fornece o comportamento específico do aplicativo para complementar a classe Application padrão.
     /// </summary>
     sealed partial class App : Application
-    {
-
-        public string LoggedUser { get; set; }
+    {        
 
         /// <summary>
         /// Inicializa o objeto singleton do aplicativo.  Esta é a primeira linha de código criado
@@ -32,8 +30,7 @@ namespace TelasReclame
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += OnSuspending;
-            LoggedUser = null;         
+            this.Suspending += OnSuspending;            
         }
 
         /// <summary>
@@ -76,7 +73,7 @@ namespace TelasReclame
                     // Quando a pilha de navegação não for restaurada, navegar para a primeira página,
                     // configurando a nova página passando as informações necessárias como um parâmetro
                     // parâmetro
-                    rootFrame.Navigate(typeof(Views.Shell), e.Arguments);
+                    rootFrame.Navigate(typeof(Views.Main), e.Arguments);
                 }
                 // Verifique se a janela atual está ativa
                 Window.Current.Activate();
