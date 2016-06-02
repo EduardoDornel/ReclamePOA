@@ -30,10 +30,12 @@
                 <ComboBox x:Name="ListCategoria"
                           Header="Categoria"
                           Width="230" Margin="12,12,0,0"
+                          ItemsSource="{Binding Categorias}"
                           />
-                <ComboBox x:Name="ListBairro" Header="Bairro"
+                <AutoSuggestBox x:Name="ListBairro" Header="Bairro"
                           Width="230" Margin="12,12,0,0"
-                          RelativePanel.Below="ListCategoria"
+                          ItemsSource="{Binding Bairros}"
+                          RelativePanel.Below="ListCategoria"                          
                           />
                 <TextBox x:Name="TextBoxEndereco" Header="Endereco"
                          Margin="12,12,12,0" Width="320"
@@ -45,15 +47,13 @@
                          MaxLength="300"/>
                 <TextBlock x:Name="LabelImageSelect" Text="Imagem" Margin="12"
                            RelativePanel.Below="TextBoxDescricao"/>
-                <Button x:Name="ImagePickerButton" Height="32" Content="Adicionar Existente" Margin="12,0" RelativePanel.Below="LabelImageSelect"/>
-                <Button x:Name="CameraPickerButton"
-                        FontFamily="Segoe MDL2 Assets" Content="&#xE114;"
-                        Height="32"
-                        RelativePanel.RightOf="ImagePickerButton" RelativePanel.AlignVerticalCenterWith="ImagePickerButton"/>
+                <Button x:Name="ImagePickerButton" Height="32" Content="Adicionar Existente"
+                        Margin="12,0" Click="ImagePickerButton_Click"
+                        RelativePanel.Below="LabelImageSelect"/>
             </RelativePanel>
         </ScrollViewer>
         <CommandBar Grid.Row="2">
-            <AppBarButton Icon="Cancel" Label="Cancelar"/>
+            <AppBarButton Icon="Cancel" Label="Cancelar" Click="CancelButton_Click"/>
             <AppBarButton Icon="Accept" Label="Confirmar" Click="SaveButton_Click"/>
         </CommandBar>
     </Grid>

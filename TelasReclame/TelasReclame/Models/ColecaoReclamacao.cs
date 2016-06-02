@@ -42,5 +42,10 @@ namespace TelasReclame.Models
             }
             return ok;
         }
+
+        public static explicit operator List<object>(ColecaoReclamacao v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

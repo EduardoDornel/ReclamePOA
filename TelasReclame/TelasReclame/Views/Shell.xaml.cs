@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,6 +28,22 @@ namespace TelasReclame.Views
             this.InitializeComponent();
             PageFrame.Navigate(typeof(Home));            
             HamburgerItemHome.IsSelected = true;
+            SystemNavigationManager.GetForCurrentView().BackRequested += (s, e) =>
+            {
+                // This is the missing line!
+                e.Handled = true;
+
+                // Close the App if you are on the startpage
+                if (PageFrame.CurrentSourcePageType == typeof(Home))
+                    App.Current.Exit();
+
+                // Navigate back
+                if (PageFrame.CanGoBack)
+                {
+                    PageFrame.GoBack();
+                }
+            };
+
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
@@ -41,5 +58,6 @@ namespace TelasReclame.Views
             else if (HamburgerList.SelectedItem.Equals(HamburgerItemProfile))
                 PageFrame.Navigate(typeof(Profile));
         }
+
     }
 }

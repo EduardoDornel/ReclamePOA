@@ -9,16 +9,16 @@ namespace TelasReclame.Models
 {
     public class Reclamacao
     {              
-
         public Reclamacao ()
         {
             Curtidas = 0;
             estaResolvida = false;
         }   
         
-        public Reclamacao(string categoria, string bairro, string endereco, string descricao,
+        public Reclamacao(int id, string categoria, string bairro, string endereco, string descricao,
                           string urlimagem)
         {
+            Id = id;
             Categoria = categoria;
             Bairro = bairro;
             Endereco = endereco;
@@ -29,6 +29,7 @@ namespace TelasReclame.Models
             estaResolvida = false;
         }     
 
+        public int Id { get; set; }
         public string Categoria { get; set; }
         public string Bairro { get; set; }
         public string Endereco { get; set; }

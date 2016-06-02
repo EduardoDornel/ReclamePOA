@@ -11,7 +11,7 @@
         <SplitView x:Name="HamburgerSplitView"                         
                    Grid.Row="1"
                    OpenPaneLength="200"
-                   CompactPaneLength="52"
+                   CompactPaneLength="48"
                    DisplayMode="CompactOverlay">
             <SplitView.Pane>
                 <Grid Background="GreenYellow">
@@ -20,8 +20,8 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Button x:Name="HamburgerButton"
-                                Width="52"
-                                Height="52"
+                                Width="48"
+                                Height="48"
                                 FontFamily="Segoe MDL2 Assets"
                                 Content="&#xE700;"
                                 Click="HamburgerButton_Click" />
@@ -32,11 +32,11 @@
                                            Text="&#xE10F;"
                                            FontSize="16"
                                            Foreground="{ThemeResource ButtonForegroundThemeBrush}"
-                                           Padding="18"
+                                           Padding="16"
                                            />
                                 <TextBlock Text="Início"
                                            VerticalAlignment="Center"
-                                           FontSize="18"
+                                           FontSize="16"
                                            Padding="12,0,0,0"/>
                             </StackPanel>
                         </ListViewItem>
@@ -46,10 +46,10 @@
                                            Text="&#xE13D;"
                                            FontSize="16"
                                            Foreground="{ThemeResource ButtonForegroundThemeBrush}"
-                                           Padding="18"/>
+                                           Padding="16"/>
                                 <TextBlock Text="Meu Perfil"
                                            VerticalAlignment="Center"
-                                           FontSize="18"
+                                           FontSize="16"
                                            Padding="12,0,0,0"
                                            />
                             </StackPanel>
