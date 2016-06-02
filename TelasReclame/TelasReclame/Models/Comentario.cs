@@ -13,6 +13,6 @@ namespace TelasReclame.Models
         public string Texto { get; set; }
         public string URLImagem { get; set; }
         public Reclamacao Reclamacao { get; set; }
-        public Usuario Usuario { get; set; }
+        //public Usuario Usuario { get; set; }
     }
 }

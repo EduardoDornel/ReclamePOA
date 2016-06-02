@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TelasReclame.Models;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -23,6 +24,8 @@ namespace TelasReclame
     sealed partial class App : Application
     {        
 
+        public ColecaoReclamacao Reclamacoes { get; set; }
+
         /// <summary>
         /// Inicializa o objeto singleton do aplicativo.  Esta é a primeira linha de código criado
         /// executado e, como tal, é o equivalente lógico de main() ou WinMain().
@@ -30,7 +33,8 @@ namespace TelasReclame
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += OnSuspending;            
+            this.Suspending += OnSuspending;
+            Reclamacoes = new ColecaoReclamacao();
         }
 
         /// <summary>
@@ -38,15 +42,21 @@ namespace TelasReclame
         /// serão usados, por exemplo, quando o aplicativo for iniciado para abrir um arquivo específico.
         /// </summary>
         /// <param name="e">Detalhes sobre a solicitação e o processo de inicialização.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
+
+            bool jaExiste = await StorageHelper.FileExistsAsync("Reclamacoes.json");
+            if (!jaExiste)
             {
-                this.DebugSettings.EnableFrameRateCounter = true;
+                await Reclamacoes.Save();
             }
-#endif
-            Frame rootFrame = Window.Current.Content as Frame;
+            else
+            {
+                await Reclamacoes.Load();
+            }
+            
+
+                        Frame rootFrame = Window.Current.Content as Frame;
 
             // Não repita a inicialização do aplicativo quando a Janela já tiver conteúdo,
             // apenas verifique se a janela está ativa
@@ -73,7 +83,7 @@ namespace TelasReclame
                     // Quando a pilha de navegação não for restaurada, navegar para a primeira página,
                     // configurando a nova página passando as informações necessárias como um parâmetro
                     // parâmetro
-                    rootFrame.Navigate(typeof(Views.Shell), e.Arguments);
+                    rootFrame.Navigate(typeof(Views.Home), e.Arguments);
                 }
                 // Verifique se a janela atual está ativa
                 Window.Current.Activate();

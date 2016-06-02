@@ -242,6 +242,34 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <DataTemplate x:Key="TemplateReclamacao">
+            <RelativePanel Width="340" Margin="12" Background="LightGreen">
+                <Rectangle x:Name="ReclamacaoFigure" Width="90" Height="90">
+                    <Rectangle.Fill>
+                        <ImageBrush Stretch="UniformToFill" ImageSource="{Binding URLImagem}"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock x:Name="IconCategoria"
+                           Text="&#xE81D;" FontFamily="Segoe MDL2 Assets" FontSize="16"
+                           Margin="8" RelativePanel.RightOf="ReclamacaoFigure"/>
+                <TextBlock x:Name="LabelCategoria"  Text="{Binding Categoria}"
+                           FontSize="16" FontWeight="Bold"
+                           RelativePanel.RightOf="IconCategoria" RelativePanel.AlignVerticalCenterWith="IconCategoria"/>
+                <TextBlock x:Name="LabelBairro" Text="{Binding Bairro}"
+                           FontSize="16"
+                           RelativePanel.Below="LabelCategoria"
+                           RelativePanel.AlignLeftWith="LabelCategoria"/>
+                <TextBlock x:Name="IconCurtidas"
+                           Text="&#xE8E1;" FontFamily="Segoe MDL2 Assets" FontSize="16"
+                           Margin="8"
+                           RelativePanel.AlignBottomWithPanel="True"
+                           RelativePanel.AlignLeftWith="IconCategoria" />
+                <TextBlock x:Name="LabelCurtidas"  Text="{Binding Curtidas}"
+                           FontSize="16" FontWeight="Bold"
+                           RelativePanel.RightOf="IconCategoria" RelativePanel.AlignVerticalCenterWith="IconCurtidas"/>
+            </RelativePanel>
+        </DataTemplate>
+        
     </Application.Resources>
 
 </Application>

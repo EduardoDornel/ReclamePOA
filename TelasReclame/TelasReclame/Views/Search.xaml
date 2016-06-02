@@ -13,7 +13,6 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Border BorderThickness="0,0,0,0.4" BorderBrush="GreenYellow">
         <Grid Background="GreenYellow">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -21,7 +20,7 @@
             </Grid.ColumnDefinitions>
             <AutoSuggestBox x:Name="SearchBar"                            
                             PlaceholderText="Busque..." Style="{StaticResource SearchBox}" />
-                <Button x:Name="SearchButton"
+            <Button x:Name="SearchButton"
                     Grid.Column="1"
                     FontFamily="Segoe MDL2 Assets"
                     Content="&#xE721;"
@@ -30,7 +29,6 @@
                     Background="Transparent"
                     RelativePanel.AlignRightWithPanel="True"                    
                     />
-            </Grid>
-        </Border>
+        </Grid>
     </Grid>
 </Page>

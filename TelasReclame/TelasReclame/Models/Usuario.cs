@@ -12,7 +12,7 @@ namespace TelasReclame.Models
         public int UsuarioId { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
-        public Bairro Bairro { get; set; }        
+        public string Bairro { get; set; }        
         public string Nome { get; set; }
     }
 }

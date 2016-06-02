@@ -95,9 +95,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ColecaoReclamacao.cs" />
+    <Compile Include="Models\Comentario.cs" />
+    <Compile Include="Models\DataContext.cs" />
+    <Compile Include="Models\Reclamacao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\AddComplaint.xaml.cs">
-      <DependentUpon>AddComplaint.xaml</DependentUpon>
+    <Compile Include="StorageHelper.cs" />
+    <Compile Include="ViewModels\AddReclamacaoViewModel.cs" />
+    <Compile Include="Views\AddReclamacao.xaml.cs">
+      <DependentUpon>AddReclamacao.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
@@ -111,8 +117,8 @@
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ViewComplaint.xaml.cs">
-      <DependentUpon>ViewComplaint.xaml</DependentUpon>
+    <Compile Include="Views\ViewReclamacao.xaml.cs">
+      <DependentUpon>ViewReclamacao.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -130,13 +136,18 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="SampleData\buraco.JPG" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\AddComplaint.xaml">
+    <DesignData Include="SampleData\ColecaoReclamacaoDataSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignData>
+    <Page Include="Views\AddReclamacao.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,13 +167,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ViewComplaint.xaml">
+    <Page Include="Views\ViewReclamacao.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

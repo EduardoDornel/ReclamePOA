@@ -24,7 +24,9 @@ namespace TelasReclame.Views
     {       
         public Home()
         {
-            this.InitializeComponent();            
+            this.InitializeComponent();
+            App myApp = (App)App.Current;
+            DataContext = myApp.Reclamacoes;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -39,7 +41,7 @@ namespace TelasReclame.Views
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(AddComplaint));
+            Frame.Navigate(typeof(AddReclamacao));
         }
     }
 }
