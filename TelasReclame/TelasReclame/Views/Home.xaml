@@ -38,7 +38,9 @@
         <!--Content-->
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <ListView x:Name="ListViewReclamacoes" ItemsSource="{Binding ListaReclamacoes}"                      
-                      ItemTemplate="{StaticResource TemplateReclamacao}">
+                      ItemTemplate="{StaticResource TemplateReclamacao}"
+                      SelectionMode="None" IsItemClickEnabled="True"
+                      ItemClick="ListViewReclamacoes_ItemClick">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment"

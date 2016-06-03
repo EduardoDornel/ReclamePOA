@@ -101,9 +101,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StorageHelper.cs" />
     <Compile Include="ViewModels\AddReclamacaoViewModel.cs" />
+    <Compile Include="ViewModels\EditReclamacaoViewModel.cs" />
     <Compile Include="ViewModels\ViewReclamacaoViewModel.cs" />
     <Compile Include="Views\AddReclamacao.xaml.cs">
       <DependentUpon>AddReclamacao.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditReclamacao.xaml.cs">
+      <DependentUpon>EditReclamacao.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
@@ -149,6 +153,10 @@
       <SubType>Designer</SubType>
     </DesignData>
     <Page Include="Views\AddReclamacao.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditReclamacao.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

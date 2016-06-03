@@ -11,7 +11,7 @@ namespace TelasReclame.Models
     {              
         public Reclamacao ()
         {
-            URLImagem = null;
+            URLImagem = "";
             Curtidas = 0;
             estaResolvida = false;
         }     

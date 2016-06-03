@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TelasReclame.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -46,6 +47,12 @@ namespace TelasReclame.Views
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(AddReclamacao));
+        }
+
+        private void ListViewReclamacoes_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            int id = ((Reclamacao)e.ClickedItem).Id;
+            Frame.Navigate(typeof(EditReclamacao), id);
         }
     }
 }

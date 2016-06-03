@@ -1,0 +1,84 @@
+﻿<Page
+    x:Class="TelasReclame.Views.EditReclamacao"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TelasReclame.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <RelativePanel x:Name="TopBar"
+                       Background="Gold"
+                       Height="48">
+            <TextBlock x:Name="PageName"
+                       FontSize="24"
+                       Text="Editar Reclamação"                       
+                       RelativePanel.AlignVerticalCenterWithPanel="True"
+                       Padding="20,0,0,0"/>
+        </RelativePanel>
+
+        <!--Content-->
+        <ScrollViewer Grid.Row="1">
+            <RelativePanel ScrollViewer.VerticalScrollMode="Auto">
+                <ComboBox x:Name="ListCategoria"
+                          Header="Categoria"
+                          Width="230" Margin="12,12,0,0"
+                          ItemsSource="{Binding Categorias}"
+                          SelectedItem="{Binding ReclamacaoTemporaria.Categoria, Mode=TwoWay}"
+                          />
+                <AutoSuggestBox x:Name="ListBairro" Header="Bairro"
+                          Width="230" Margin="12,12,0,0"
+                          ItemsSource="{Binding Bairros}"
+                          Text="{Binding ReclamacaoTemporaria.Bairro, Mode=TwoWay}"
+                          RelativePanel.Below="ListCategoria"                          
+                          />
+                <TextBox x:Name="TextBoxEndereco" Header="Endereco"
+                         Text="{Binding ReclamacaoTemporaria.Endereco, Mode=TwoWay}" 
+                         Margin="12,12,12,0" Width="320"
+                         RelativePanel.Below="ListBairro"/>
+                <TextBox x:Name="TextBoxDescricao" Header="Descrição"
+                         Text="{Binding ReclamacaoTemporaria.Descricao, Mode=TwoWay}"
+                         TextWrapping="Wrap"                         
+                         Margin="12,12,12,0" Width="320"
+                         RelativePanel.Below="TextBoxEndereco"
+                         MaxLength="300"/>
+                <TextBlock x:Name="TextBoxDescricaoCounter"
+                           Text="300/300" FontSize="10" Margin="0,4,12,0"
+                           RelativePanel.Below="TextBoxDescricao"
+                           RelativePanel.AlignRightWith="TextBoxDescricao" />
+                <TextBlock x:Name="LabelImageSelect" Text="Imagem" Margin="12,0"
+                           RelativePanel.Below="TextBoxDescricaoCounter"/>
+                <AppBarButton x:Name="ImagePickerButton" Icon="Pictures"
+                              Label="Adicionar Existente"
+                              Margin="20,24,0,0" Click="ImagePickerButton_Click"                              
+                              RelativePanel.Below="LabelImageSelect"/>
+                <AppBarButton x:Name="RemoveImageButton" Icon="Remove"
+                              Label="Remover Imagem"
+                              Margin="20,24,0,0" Click="RemoveImageButton_Click"                              
+                              RelativePanel.Below="ImagePickerButton"/>
+                <Border x:Name="ImagemBorder"
+                        Width="200"
+                        Height="200"
+                        BorderBrush="Gray" BorderThickness="1"
+                        Margin="40"                        
+                        RelativePanel.Below="TextBoxDescricaoCounter"
+                        RelativePanel.RightOf="LabelImageSelect" Background="Black">
+                    <Image x:Name="ImagemRetangulo"
+                           Width="200" Height="200"                           
+                           Source="{Binding ReclamacaoTemporaria.URLImagem, Mode=TwoWay}" />
+                </Border>
+            </RelativePanel>
+        </ScrollViewer>
+        <CommandBar Grid.Row="2">
+            <AppBarButton Icon="Cancel" Label="Cancelar" Click="CancelButton_Click"/>
+            <AppBarButton Icon="Accept" Label="Confirmar" Click="SaveButton_Click"/>
+        </CommandBar>
+    </Grid>
+</Page>

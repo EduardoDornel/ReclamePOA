@@ -67,7 +67,6 @@ namespace TelasReclame.Views
 
         private async void ImagePickerButton_Click(object sender, RoutedEventArgs e)
         {            
-           
             FileOpenPicker openPicker = new FileOpenPicker();            
             openPicker.ViewMode = PickerViewMode.Thumbnail;
             openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
@@ -81,7 +80,7 @@ namespace TelasReclame.Views
 
             if (imagem != null)
             {
-                // Application now has read/write access to the picked file                                    
+                // Application now has read/write access to the picked file                            
                 StorageFile copiaImagem = await imagem.CopyAsync(localFolder, nomeImagem, NameCollisionOption.GenerateUniqueName);
                 ViewModel.ReclamacaoAtual.URLImagem = copiaImagem.Path;
                 Uri imageUri = new Uri(ViewModel.ReclamacaoAtual.URLImagem, UriKind.Relative);
@@ -95,6 +94,14 @@ namespace TelasReclame.Views
         {
             if (Frame.CanGoBack)
                 Frame.GoBack();
+        }
+
+        private void RemoveImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (File.Exists(ViewModel.ReclamacaoAtual.URLImagem))
+                File.Delete(ViewModel.ReclamacaoAtual.URLImagem);
+            ViewModel.ReclamacaoAtual.URLImagem = null;
+            ImagemRetangulo.Source = new BitmapImage();
         }
     }
 }
