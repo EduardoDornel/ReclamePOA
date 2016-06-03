@@ -15,8 +15,8 @@
         </Grid.RowDefinitions>
 
         <RelativePanel x:Name="TopBar"
-                       Background="GreenYellow"
-                       Height="52">
+                       Background="Gold"
+                       Height="48">
             <TextBlock x:Name="PageName"
                        FontSize="24"
                        Text="Adicionar Reclamação"                       
@@ -31,25 +31,45 @@
                           Header="Categoria"
                           Width="230" Margin="12,12,0,0"
                           ItemsSource="{Binding Categorias}"
+                          SelectedItem="{Binding ReclamacaoAtual.Categoria, Mode=TwoWay}"
                           />
                 <AutoSuggestBox x:Name="ListBairro" Header="Bairro"
                           Width="230" Margin="12,12,0,0"
                           ItemsSource="{Binding Bairros}"
+                          Text="{Binding ReclamacaoAtual.Bairro, Mode=TwoWay}"
                           RelativePanel.Below="ListCategoria"                          
                           />
                 <TextBox x:Name="TextBoxEndereco" Header="Endereco"
+                         Text="{Binding ReclamacaoAtual.Endereco, Mode=TwoWay}" 
                          Margin="12,12,12,0" Width="320"
-                         RelativePanel.Below="ListBairro" />
+                         RelativePanel.Below="ListBairro"/>
                 <TextBox x:Name="TextBoxDescricao" Header="Descrição"
+                         Text="{Binding ReclamacaoAtual.Descricao, Mode=TwoWay}"
                          TextWrapping="Wrap"                         
                          Margin="12,12,12,0" Width="320"
                          RelativePanel.Below="TextBoxEndereco"
                          MaxLength="300"/>
-                <TextBlock x:Name="LabelImageSelect" Text="Imagem" Margin="12"
-                           RelativePanel.Below="TextBoxDescricao"/>
-                <Button x:Name="ImagePickerButton" Height="32" Content="Adicionar Existente"
-                        Margin="12,0" Click="ImagePickerButton_Click"
-                        RelativePanel.Below="LabelImageSelect"/>
+                <TextBlock x:Name="TextBoxDescricaoCounter"
+                           Text="300/300" FontSize="10" Margin="0,4,12,0"
+                           RelativePanel.Below="TextBoxDescricao"
+                           RelativePanel.AlignRightWith="TextBoxDescricao" />
+                <TextBlock x:Name="LabelImageSelect" Text="Imagem" Margin="12,0"
+                           RelativePanel.Below="TextBoxDescricaoCounter"/>
+                <AppBarButton x:Name="ImagePickerButton" Icon="Pictures"
+                              Label="Adicionar Existente"
+                              Margin="20,0,0,0" Click="ImagePickerButton_Click"                              
+                              RelativePanel.AlignVerticalCenterWith="ImagemBorder"/>
+                <Border x:Name="ImagemBorder"
+                        Width="200"
+                        Height="200"
+                        BorderBrush="Gray" BorderThickness="1"
+                        Margin="40"                        
+                        RelativePanel.Below="TextBoxDescricaoCounter"
+                        RelativePanel.RightOf="LabelImageSelect" Background="Black">
+                    <Image x:Name="ImagemRetangulo"
+                           Width="200" Height="200"                           
+                           Source="ms-appx:///Assets/nopicdefault.png" />
+                </Border>
             </RelativePanel>
         </ScrollViewer>
         <CommandBar Grid.Row="2">

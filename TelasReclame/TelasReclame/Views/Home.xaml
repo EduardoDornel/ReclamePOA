@@ -16,13 +16,13 @@
         </Grid.RowDefinitions>
 
         <RelativePanel x:Name="TopBar"
-                       Background="GreenYellow"
-                       Height="52">
+                       Background="Gold"                       
+                       Height="48">
             <TextBlock x:Name="PageName"
                        FontSize="24"
                        Text="Início"                       
                        RelativePanel.AlignVerticalCenterWithPanel="True"
-                       Padding="20,0,0,0"/>
+                       Padding="20,0,0,0" />
             <Button x:Name="SearchButton"                                                            
                     FontFamily="Segoe MDL2 Assets"
                     Content="&#xE721;"
@@ -36,8 +36,16 @@
         
         
         <!--Content-->
-        <ScrollViewer Grid.Row="1">
-            <GridView x:Name="ListViewReclamacoes" ItemsSource="{Binding ListaReclamacoes}" ItemTemplate="{StaticResource TemplateReclamacao}" />
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ListView x:Name="ListViewReclamacoes" ItemsSource="{Binding ListaReclamacoes}"                      
+                      ItemTemplate="{StaticResource TemplateReclamacao}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
         </ScrollViewer>
         
         <!--Bottom-->

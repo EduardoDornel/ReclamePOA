@@ -11,21 +11,8 @@ namespace TelasReclame.Models
     {              
         public Reclamacao ()
         {
+            URLImagem = null;
             Curtidas = 0;
-            estaResolvida = false;
-        }   
-        
-        public Reclamacao(int id, string categoria, string bairro, string endereco, string descricao,
-                          string urlimagem)
-        {
-            Id = id;
-            Categoria = categoria;
-            Bairro = bairro;
-            Endereco = endereco;
-            Descricao = descricao;
-            URLImagem = urlimagem;
-            Curtidas = 0;
-            DataCriacao = DateTime.Now;
             estaResolvida = false;
         }     
 
@@ -38,19 +25,6 @@ namespace TelasReclame.Models
         public int Curtidas { get; set; }
         public DateTime DataCriacao { get; set; }
         public bool estaResolvida { get; set; }
-        public DateTime DataResolucao { get; set; }
-        
-        public int Protocolo
-        {
-            get {
-                int protocolo = DataCriacao.Year +
-                                DataCriacao.Month +
-                                DataCriacao.Day +
-                                DataCriacao.Hour +
-                                DataCriacao.Minute +
-                                DataCriacao.Second;
-                return protocolo;
-            }
-        }                        
+        public DateTime DataResolucao { get; set; }                        
     }
 }

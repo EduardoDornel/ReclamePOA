@@ -13,22 +13,22 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Background="GreenYellow">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
+        <RelativePanel Background="Gold">
             <AutoSuggestBox x:Name="SearchBar"                            
-                            PlaceholderText="Busque..." Style="{StaticResource SearchBox}" />
+                            PlaceholderText="Busque..."
+                            Margin="8"
+                            RelativePanel.LeftOf="SearchButton"
+                            RelativePanel.AlignLeftWithPanel="True"                            
+                            RelativePanel.AlignVerticalCenterWithPanel="True"/>
             <Button x:Name="SearchButton"
                     Grid.Column="1"
                     FontFamily="Segoe MDL2 Assets"
                     Content="&#xE721;"
-                    Width="52"
-                    Height="52"                       
+                    Width="48"
+                    Height="48"                       
                     Background="Transparent"
                     RelativePanel.AlignRightWithPanel="True"                    
                     />
-        </Grid>
+        </RelativePanel>
     </Grid>
 </Page>

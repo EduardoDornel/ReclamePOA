@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // O modelo de item de Página em Branco é documentado em http://go.microsoft.com/fwlink/?LinkId=234238
@@ -29,34 +30,31 @@ namespace TelasReclame.Views
     public sealed partial class AddReclamacao : Page
     {
 
-        public AddReclamacaoViewModel ViewModel = new AddReclamacaoViewModel();
+        public AddReclamacaoViewModel ViewModel { get; set; }
         App myApp = (App)App.Current;
-
-        public string urlCopiaImagem;
+        
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
+        {            
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-
         }
 
         public AddReclamacao()
         {
             this.InitializeComponent();
+            ViewModel = new AddReclamacaoViewModel();
             DataContext = ViewModel;
         }
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            App myApp = (App)App.Current;
-            Reclamacao NovaReclamacao = new Reclamacao(myApp.Reclamacoes.ListaReclamacoes.Count, ListCategoria.SelectedItem.ToString(), ListBairro.Text, TextBoxEndereco.Text, TextBoxDescricao.Text, urlCopiaImagem);
-            myApp.Reclamacoes.ListaReclamacoes.Add(NovaReclamacao);
+            App myApp = (App)App.Current;            
+            myApp.Reclamacoes.ListaReclamacoes.Add(ViewModel.ReclamacaoAtual);
             bool ok = await myApp.Reclamacoes.Save();
             if (ok)
             {
                 var dialog = new MessageDialog("Reclamação inserida com sucesso.");
-                await dialog.ShowAsync();
+                await dialog.ShowAsync();                
                 this.Frame.GoBack();
             }
             else
@@ -68,30 +66,27 @@ namespace TelasReclame.Views
         }
 
         private async void ImagePickerButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Clear previous returned file name, if it exists, between iterations of this scenario
-
-            
-            FileOpenPicker openPicker = new FileOpenPicker();
-
+        {            
+           
+            FileOpenPicker openPicker = new FileOpenPicker();            
             openPicker.ViewMode = PickerViewMode.Thumbnail;
             openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
             openPicker.FileTypeFilter.Add(".jpg");
             openPicker.FileTypeFilter.Add(".jpeg");
-            openPicker.FileTypeFilter.Add(".png");
-
-
-            string nomeImagem = "img_" + myApp.Reclamacoes.ListaReclamacoes.Count.ToString();
+            openPicker.FileTypeFilter.Add(".png");            
 
             StorageFile imagem = await openPicker.PickSingleFileAsync();
-            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-            StorageFile copiaImagem = await imagem.CopyAsync(localFolder, nomeImagem); 
+            StorageFolder localFolder = ApplicationData.Current.LocalFolder;            
+            string nomeImagem = "img_" + ViewModel.ReclamacaoAtual.Id;
 
-            if (copiaImagem != null)
-
+            if (imagem != null)
             {
-                // Application now has read/write access to the picked file               
-                urlCopiaImagem = copiaImagem.Path;                                                
+                // Application now has read/write access to the picked file                                    
+                StorageFile copiaImagem = await imagem.CopyAsync(localFolder, nomeImagem, NameCollisionOption.GenerateUniqueName);
+                ViewModel.ReclamacaoAtual.URLImagem = copiaImagem.Path;
+                Uri imageUri = new Uri(ViewModel.ReclamacaoAtual.URLImagem, UriKind.Relative);
+                BitmapImage imageBitmap = new BitmapImage(imageUri);                
+                ImagemRetangulo.Source = imageBitmap;                    
             }
 
         }       

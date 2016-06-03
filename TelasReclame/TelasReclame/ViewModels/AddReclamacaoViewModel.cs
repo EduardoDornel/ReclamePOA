@@ -9,12 +9,11 @@ namespace TelasReclame.ViewModels
 {
     public class AddReclamacaoViewModel
     {
-        public Reclamacao ReclamacaoAtual { get; set; }
 
-        //Propriedades
+        //Propriedades        
+        public Reclamacao ReclamacaoAtual { get; set; }
         public List<string> Bairros { get { return bairros; } }
         public List<string> Categorias { get { return categorias;  } }
-
 
         //Atributos
         private List<string> categorias;
@@ -23,6 +22,9 @@ namespace TelasReclame.ViewModels
         public AddReclamacaoViewModel ()
         {
             ReclamacaoAtual = new Reclamacao();
+            var myApp = (App)App.Current;
+            // Gera a ID da Reclamação logo após que a instância for criada.
+            ReclamacaoAtual.Id = myApp.Reclamacoes.ListaReclamacoes.Count;
             categorias = new List<string>()
             {
                 "Acessibilidade", "Água e esgoto", "Alagamento", "Árvore", "Bem público", "Buraco", "Ciclovia", "Comércio", "Educação", "Energia", "Iluminação", "Lixo", "Mato", "Obra", "Pedestre", "Pichação", "Poluição do ar", "Poluição sonora", "Poluição visual", "Queimada", "Saúde", "Segurança", "Social", "Transporte", "Trânsito"
