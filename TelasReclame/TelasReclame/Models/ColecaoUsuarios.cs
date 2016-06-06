@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace TelasReclame.Models
 {
-    class ColecaoUsuarios
+    public class ColecaoUsuarios
     {
         // Atributos
-        List<Usuario> usuarios;        
-
+        private List<Usuario> usuarios;        
+        
+        // Propriedades
+        public List<Usuario> Usuarios { get { return usuarios; } }
     }
 }
