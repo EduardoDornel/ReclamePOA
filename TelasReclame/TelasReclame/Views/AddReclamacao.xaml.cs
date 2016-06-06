@@ -58,7 +58,8 @@ namespace TelasReclame.Views
             }
             else
             {            
-                App myApp = (App)App.Current;            
+                App myApp = (App)App.Current;
+                ViewModel.ReclamacaoAtual.DataCriacao = DateTime.Now;           
                 myApp.Reclamacoes.ListaReclamacoes.Add(ViewModel.ReclamacaoAtual);
                 bool ok = await myApp.Reclamacoes.Save();
                 if (ok)
