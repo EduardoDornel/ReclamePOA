@@ -38,7 +38,7 @@ namespace TelasReclame.Models
             }
             catch (Exception e)
             {
-                ok = false;
+                string mensagem = e.Message;
             }
             return ok;
         }

@@ -26,10 +26,12 @@ namespace TelasReclame.Views
     public sealed partial class Home : Page
     {       
 
+        App myApp { get; set; }
+
         public Home()
         {
             this.InitializeComponent();
-            App myApp = (App)App.Current;
+            myApp = (App)App.Current;
             DataContext = myApp.Reclamacoes;
         }
 
@@ -37,6 +39,16 @@ namespace TelasReclame.Views
         {
             base.OnNavigatedTo(e);
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            if (myApp.Reclamacoes.ListaReclamacoes.Count > 0)
+            {
+                TextoZeroReclamacoes.Visibility = Visibility.Collapsed;
+                ViewReclamacoes.Visibility = Visibility.Visible;                
+            }
+            else
+            {
+                TextoZeroReclamacoes.Visibility = Visibility.Visible;
+                ViewReclamacoes.Visibility = Visibility.Collapsed;
+            }
         }        
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)

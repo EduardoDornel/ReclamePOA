@@ -5,7 +5,7 @@
     xmlns:local="using:TelasReclame.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" d:DataContext="{d:DesignData /SampleData/ColecaoReclamacaoDataSample.xaml}"
+    mc:Ignorable="d"
     >
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -33,10 +33,20 @@
                     RelativePanel.AlignRightWithPanel="True"                    
                     />
         </RelativePanel>
-        
+
+        <!--In case of no content-->
+        <StackPanel x:Name="TextoZeroReclamacoes" Grid.Row="1" Background="Yellow">
+            <TextBlock Text="Parece que não há nada aqui!"
+                       FontSize="32" TextWrapping="Wrap"
+                       FontWeight="Black"
+                       Margin="18"
+                       TextAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" TextAlignment="Center"
+                       Margin="18">Para começar, adicione alguma reclamação com o botão <Bold>"+"</Bold> na barra inferior.</TextBlock>
+        </StackPanel>        
         
         <!--Content-->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="ViewReclamacoes" Grid.Row="1" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
             <ListView x:Name="ListViewReclamacoes" ItemsSource="{Binding ListaReclamacoes}"                      
                       ItemTemplate="{StaticResource TemplateReclamacao}"
                       SelectionMode="None" IsItemClickEnabled="True"
@@ -54,6 +64,7 @@
         <CommandBar x:Name="MainCommandBar"
                     Grid.Row="2"
                     ClosedDisplayMode="Compact"
+                    Background="Yellow"
                     >
             <AppBarButton Icon="Add"
                           Label="Nova Reclamação"

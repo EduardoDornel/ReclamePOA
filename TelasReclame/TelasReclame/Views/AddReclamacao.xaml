@@ -33,10 +33,10 @@
                           ItemsSource="{Binding Categorias}"
                           SelectedItem="{Binding ReclamacaoAtual.Categoria, Mode=TwoWay}"
                           />
-                <AutoSuggestBox x:Name="ListBairro" Header="Bairro"
+                <ComboBox x:Name="ListBairro" Header="Bairro"
                           Width="230" Margin="12,12,0,0"
                           ItemsSource="{Binding Bairros}"
-                          Text="{Binding ReclamacaoAtual.Bairro, Mode=TwoWay}"
+                          SelectedItem="{Binding ReclamacaoAtual.Bairro, Mode=TwoWay}"
                           RelativePanel.Below="ListCategoria"                          
                           />
                 <TextBox x:Name="TextBoxEndereco" Header="Endereco"
@@ -57,8 +57,12 @@
                            RelativePanel.Below="TextBoxDescricaoCounter"/>
                 <AppBarButton x:Name="ImagePickerButton" Icon="Pictures"
                               Label="Adicionar Existente"
-                              Margin="20,0,0,0" Click="ImagePickerButton_Click"                              
-                              RelativePanel.AlignVerticalCenterWith="ImagemBorder"/>
+                              Margin="20,24,0,0" Click="ImagePickerButton_Click"                              
+                              RelativePanel.Below="LabelImageSelect"/>
+                <AppBarButton x:Name="RemoveImageButton" Icon="Cancel"
+                              Label="Remover Imagem"
+                              Margin="20,24,0,0" Click="RemoveImageButton_Click"                              
+                              RelativePanel.Below="ImagePickerButton"/>
                 <Border x:Name="ImagemBorder"
                         Width="200"
                         Height="200"
@@ -73,7 +77,7 @@
             </RelativePanel>
         </ScrollViewer>
         <CommandBar Grid.Row="2">
-            <AppBarButton Icon="Cancel" Label="Cancelar" Click="CancelButton_Click"/>
+            <AppBarButton Icon="Back" Label="Cancelar" Click="CancelButton_Click"/>
             <AppBarButton Icon="Accept" Label="Confirmar" Click="SaveButton_Click"/>
         </CommandBar>
     </Grid>

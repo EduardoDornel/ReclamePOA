@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TelasReclame.Models;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace TelasReclame.ViewModels
 {
@@ -11,7 +12,7 @@ namespace TelasReclame.ViewModels
     {
         //Propriedades        
         public Reclamacao ReclamacaoAtual { get; set; }
-        public Reclamacao ReclamacaoTemporaria { get; set; }
+        public Reclamacao ReclamacaoTemporaria { get; set; }       
         public List<string> Bairros { get { return bairros; } }
         public List<string> Categorias { get { return categorias; } }
 

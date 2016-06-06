@@ -48,20 +48,29 @@ namespace TelasReclame.Views
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            App myApp = (App)App.Current;            
-            myApp.Reclamacoes.ListaReclamacoes.Add(ViewModel.ReclamacaoAtual);
-            bool ok = await myApp.Reclamacoes.Save();
-            if (ok)
+            if (ListCategoria.SelectedIndex <= -1 ||
+                ListBairro.SelectedIndex <= -1 ||
+                string.IsNullOrWhiteSpace(TextBoxEndereco.Text) ||
+                string.IsNullOrWhiteSpace(TextBoxDescricao.Text))
             {
-                var dialog = new MessageDialog("Reclamação inserida com sucesso.");
-                await dialog.ShowAsync();                
-                this.Frame.GoBack();
+                var dialog = new MessageDialog("Favor preencher todos os campos antes de salvar a reclamação.");
+                await dialog.ShowAsync();
             }
             else
-            {
-                myApp.Reclamacoes.ListaReclamacoes.RemoveAt(myApp.Reclamacoes.ListaReclamacoes.Count - 1);
-                var dialog = new MessageDialog("Falha no armazenamento da reclamação.");
-                await dialog.ShowAsync();
+            {            
+                App myApp = (App)App.Current;            
+                myApp.Reclamacoes.ListaReclamacoes.Add(ViewModel.ReclamacaoAtual);
+                bool ok = await myApp.Reclamacoes.Save();
+                if (ok)
+                {                    
+                    this.Frame.GoBack();
+                }
+                else
+                {
+                    myApp.Reclamacoes.ListaReclamacoes.RemoveAt(myApp.Reclamacoes.ListaReclamacoes.Count - 1);
+                    var dialog = new MessageDialog("Falha no armazenamento da reclamação.");
+                    await dialog.ShowAsync();
+                }
             }
         }
 
@@ -75,7 +84,7 @@ namespace TelasReclame.Views
             openPicker.FileTypeFilter.Add(".png");            
 
             StorageFile imagem = await openPicker.PickSingleFileAsync();
-            StorageFolder localFolder = ApplicationData.Current.LocalFolder;            
+            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
             string nomeImagem = "img_" + ViewModel.ReclamacaoAtual.Id;
 
             if (imagem != null)
@@ -101,7 +110,8 @@ namespace TelasReclame.Views
             if (File.Exists(ViewModel.ReclamacaoAtual.URLImagem))
                 File.Delete(ViewModel.ReclamacaoAtual.URLImagem);
             ViewModel.ReclamacaoAtual.URLImagem = null;
-            ImagemRetangulo.Source = new BitmapImage();
+            BitmapImage imagemPadrao = new BitmapImage(new Uri(this.BaseUri, "/Assets/nopicdefault.png"));
+            ImagemRetangulo.Source = imagemPadrao;
         }
     }
 }

@@ -31,8 +31,9 @@ namespace TelasReclame.Views
     {
 
         public EditReclamacaoViewModel ViewModel { get; set; }
+        public BitmapImage ImagemPadrao { get; set; }
         App myApp = (App)App.Current;
-
+        bool DeletarArquivo { get; set; }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -45,11 +46,28 @@ namespace TelasReclame.Views
                                   where f.Id == id
                                   select f).FirstOrDefault();
                 this.ViewModel.ReclamacaoAtual = reclamacao;
-                this.ViewModel.ReclamacaoTemporaria = new Reclamacao() { Id = reclamacao.Id, Bairro = reclamacao.Bairro,
-                    Categoria = reclamacao.Categoria, Curtidas=reclamacao.Curtidas, DataCriacao = reclamacao.DataCriacao,
-                    DataResolucao = reclamacao.DataResolucao, Descricao = reclamacao.Descricao, Endereco = reclamacao.Endereco,
-                    estaResolvida = reclamacao.estaResolvida, URLImagem = reclamacao.URLImagem};
+                this.ViewModel.ReclamacaoTemporaria = new Reclamacao()
+                {
+                    Id = reclamacao.Id,
+                    Bairro = reclamacao.Bairro,
+                    Categoria = reclamacao.Categoria,
+                    Curtidas = reclamacao.Curtidas,
+                    DataCriacao = reclamacao.DataCriacao,
+                    DataResolucao = reclamacao.DataResolucao,
+                    Descricao = reclamacao.Descricao,
+                    Endereco = reclamacao.Endereco,
+                    estaResolvida = reclamacao.estaResolvida,
+                    URLImagem = reclamacao.URLImagem
+                };
             }
+            if (ViewModel.ReclamacaoTemporaria.URLImagem == null)
+                ImagemRetangulo.Source = ImagemPadrao;
+            else
+            {
+                BitmapImage imagemReclamacao = new BitmapImage(new Uri(ViewModel.ReclamacaoTemporaria.URLImagem));
+                ImagemRetangulo.Source = imagemReclamacao;
+            }
+
         }
 
         public EditReclamacao()
@@ -57,6 +75,7 @@ namespace TelasReclame.Views
             this.InitializeComponent();
             ViewModel = new EditReclamacaoViewModel();
             DataContext = ViewModel;
+            ImagemPadrao = new BitmapImage(new Uri(this.BaseUri, "/Assets/nopicdefault.png"));
         }
 
 
@@ -72,14 +91,14 @@ namespace TelasReclame.Views
 
             StorageFile imagem = await openPicker.PickSingleFileAsync();
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-            string nomeImagem = "img_" + ViewModel.ReclamacaoAtual.Id;
+            string nomeImagem = "img_" + ViewModel.ReclamacaoTemporaria.Id;
 
             if (imagem != null)
             {
-                // Application now has read/write access to the picked file                                                                   
-                StorageFile copiaImagem = await imagem.CopyAsync(localFolder, nomeImagem, NameCollisionOption.GenerateUniqueName);                
+                // Application now has read/write access to the picked file                                                                               
+                StorageFile copiaImagem = await imagem.CopyAsync(localFolder, nomeImagem, NameCollisionOption.GenerateUniqueName);
                 ViewModel.ReclamacaoTemporaria.URLImagem = copiaImagem.Path;
-                Uri imageUri = new Uri(ViewModel.ReclamacaoTemporaria.URLImagem, UriKind.Relative);
+                Uri imageUri = new Uri(ViewModel.ReclamacaoTemporaria.URLImagem);
                 BitmapImage imageBitmap = new BitmapImage(imageUri);
                 ImagemRetangulo.Source = imageBitmap;
             }
@@ -89,18 +108,16 @@ namespace TelasReclame.Views
         {
             App myApp = (App)App.Current;
             var posicaoAlterado = myApp.Reclamacoes.ListaReclamacoes.FindIndex(p => p.Id == ViewModel.ReclamacaoTemporaria.Id);
-            myApp.Reclamacoes.ListaReclamacoes[posicaoAlterado] = ViewModel.ReclamacaoTemporaria;            
+            myApp.Reclamacoes.ListaReclamacoes[posicaoAlterado] = ViewModel.ReclamacaoTemporaria;
             bool ok = await myApp.Reclamacoes.Save();
             if (ok)
-            {
-                var dialog = new MessageDialog("Reclamação inserida com sucesso.");
-                await dialog.ShowAsync();
+            {                                
                 this.Frame.GoBack();
             }
             else
             {
                 myApp.Reclamacoes.ListaReclamacoes.RemoveAt(myApp.Reclamacoes.ListaReclamacoes.Count - 1);
-                var dialog = new MessageDialog("Falha no armazenamento da reclamação.");
+                var dialog = new MessageDialog("Falha ao salvar a reclamação.");
                 await dialog.ShowAsync();
             }
         }
@@ -113,10 +130,45 @@ namespace TelasReclame.Views
 
         private void RemoveImageButton_Click(object sender, RoutedEventArgs e)
         {
-            if(File.Exists(ViewModel.ReclamacaoTemporaria.URLImagem))
-                File.Delete(ViewModel.ReclamacaoTemporaria.URLImagem);
             ViewModel.ReclamacaoTemporaria.URLImagem = null;
-            ImagemRetangulo.Source = new BitmapImage();
+            ImagemRetangulo.Source = ImagemPadrao;
+        }
+
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {            
+
+            var confirmDialog = new MessageDialog("Deseja realmante excluir a reclamação?");
+            confirmDialog.Commands.Add(new UICommand("Sim", (command) =>
+            {
+                DeletarArquivo = true;
+            }));
+            confirmDialog.Commands.Add(new UICommand("Não", (command) =>
+            {
+                DeletarArquivo = false;
+            }));
+
+            confirmDialog.DefaultCommandIndex = 0;
+            confirmDialog.CancelCommandIndex = 1;
+            await confirmDialog.ShowAsync();
+
+            if (DeletarArquivo)
+
+            {
+                var reclamacaoRemovida = ViewModel.ReclamacaoAtual;
+                var posicaoRemocao = myApp.Reclamacoes.ListaReclamacoes.FindIndex(p => p.Id == reclamacaoRemovida.Id);
+                myApp.Reclamacoes.ListaReclamacoes.RemoveAt(posicaoRemocao);
+                bool ok = await myApp.Reclamacoes.Save();
+                if (ok)
+                {                                        
+                    this.Frame.GoBack();
+                }
+                else
+                {
+                    myApp.Reclamacoes.ListaReclamacoes.Insert(posicaoRemocao, reclamacaoRemovida);
+                    var dialog = new MessageDialog("Falha ao remover reclamação.");
+                    await dialog.ShowAsync();
+                }
+            }
         }
     }
 }

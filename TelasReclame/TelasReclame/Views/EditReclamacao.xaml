@@ -59,7 +59,7 @@
                               Label="Adicionar Existente"
                               Margin="20,24,0,0" Click="ImagePickerButton_Click"                              
                               RelativePanel.Below="LabelImageSelect"/>
-                <AppBarButton x:Name="RemoveImageButton" Icon="Remove"
+                <AppBarButton x:Name="RemoveImageButton" Icon="Cancel"
                               Label="Remover Imagem"
                               Margin="20,24,0,0" Click="RemoveImageButton_Click"                              
                               RelativePanel.Below="ImagePickerButton"/>
@@ -72,13 +72,14 @@
                         RelativePanel.RightOf="LabelImageSelect" Background="Black">
                     <Image x:Name="ImagemRetangulo"
                            Width="200" Height="200"                           
-                           Source="{Binding ReclamacaoTemporaria.URLImagem, Mode=TwoWay}" />
+                           />
                 </Border>
             </RelativePanel>
         </ScrollViewer>
-        <CommandBar Grid.Row="2">
-            <AppBarButton Icon="Cancel" Label="Cancelar" Click="CancelButton_Click"/>
-            <AppBarButton Icon="Accept" Label="Confirmar" Click="SaveButton_Click"/>
+        <CommandBar x:Name="CommandBar" Grid.Row="2">
+            <AppBarButton Icon="Back" Label="Cancelar Edição" Click="CancelButton_Click"/>
+            <AppBarButton Icon="Delete" Label="Excluir Reclamação" Click="DeleteButton_Click"/>
+            <AppBarButton Icon="Accept" Label="Confirmar Edição" Click="SaveButton_Click"/>
         </CommandBar>
     </Grid>
 </Page>
