@@ -7,13 +7,10 @@ using TelasReclame.Models;
 
 namespace TelasReclame.ViewModels
 {
-    class ViewReclamacaoViewModel
+    public class ViewReclamacaoViewModel
     {
-        public Reclamacao ReclamacaoAtual { get; set; }
+        // Propriedades
+        public Reclamacao ReclamacaoAtual { get; set; }        
 
-        public ViewReclamacaoViewModel(int id)
-        {
-
-        }
     }
 }

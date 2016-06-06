@@ -9,26 +9,36 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ScrollViewer>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
             <RelativePanel ScrollViewer.VerticalScrollMode="Auto">
-                <Image x:Name="ComplaintImage" Height="250" Source="ms-appx:///Assets/buraco.JPG" Stretch="UniformToFill"/>
-                <TextBlock x:Name="ComplaintTitle"
-                   Text="Buraco na rua"
+                <Image x:Name="ComplaintImage" Height="250" Source="{Binding ReclamacaoAtual.URLImagem}" Stretch="UniformToFill"/>
+                <TextBlock x:Name="ComplaintCategory"
+                   Text="{Binding ReclamacaoAtual.Categoria}"
                    FontSize="32"
                    Margin="12,4"                   
                    RelativePanel.Below="ComplaintImage"
                    />
+                <ToggleButton x:Name="ToggleLike"                              
+                              RelativePanel.Below="ComplaintImage"
+                              RelativePanel.AlignRightWithPanel="True"                              
+                              Margin="12"                              
+                              Checked="ToggleLike_Checked">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon x:Name="IconeLike" Symbol="Like" />
+                        <TextBlock x:Name="NumeroLike" Text="{Binding ReclamacaoAtual.Curtidas}" />
+                    </StackPanel>
+                </ToggleButton>
                 <TextBlock x:Name="ComplaintBairro"
-                   Text="No bairro Sarandi"
+                   Text="{Binding ReclamacaoAtual.Bairro}"
                    FontSize="18"
                    Margin="12,0,12,8"
-                   RelativePanel.Below="ComplaintTitle"/>
+                   RelativePanel.Below="ComplaintCategory"/>
                 <TextBlock x:Name="ComplaintDescription"
-                   Text="Porro repudiandae qui voluptas quo quod porro. Beatae repudiandae aut eum tenetur atque. Vel cum accusamus est quidem quia voluptatem est dolores.
-Odio voluptatem quia provident id. Est ad culpa vero. Ut laborum perspiciatis reiciendis consectetur aspernatur autem fugit voluptatem. Et eos veritatis culpa veniam consequatur quam corrupti et."
+                   Text="{Binding ReclamacaoAtual.Descricao}"
                    TextWrapping="WrapWholeWords"
                    Margin="12,0,12,8"
                    RelativePanel.Below="ComplaintBairro"
@@ -38,7 +48,8 @@ Odio voluptatem quia provident id. Est ad culpa vero. Ut laborum perspiciatis re
         </ScrollViewer>
         <CommandBar Grid.Row="2">
             <AppBarButton x:Name="EditComplaint"
-                          Icon="Edit"/>
+                          Icon="Edit"
+                          Click="EditComplaint_Click"/>
             <AppBarButton x:Name="AddComment"
                           Icon="Comment"/>
         </CommandBar>

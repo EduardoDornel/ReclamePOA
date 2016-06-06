@@ -24,7 +24,8 @@ namespace TelasReclame
     sealed partial class App : Application
     {        
 
-        public ColecaoReclamacao Reclamacoes { get; set; }
+        public ColecaoReclamacao ColecaoReclamacoes { get; set; }
+        public Usuario UsuarioLogado { get; set; }
 
         /// <summary>
         /// Inicializa o objeto singleton do aplicativo.  Esta é a primeira linha de código criado
@@ -34,7 +35,8 @@ namespace TelasReclame
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            Reclamacoes = new ColecaoReclamacao();
+            ColecaoReclamacoes = new ColecaoReclamacao();
+            UsuarioLogado = new Usuario();
         }
 
         /// <summary>
@@ -48,11 +50,11 @@ namespace TelasReclame
             bool jaExiste = await StorageHelper.FileExistsAsync("Reclamacoes.json");
             if (!jaExiste)
             {
-                await Reclamacoes.Save();
+                await ColecaoReclamacoes.Save();
             }
             else
             {
-                await Reclamacoes.Load();
+                await ColecaoReclamacoes.Load();
             }
             
 

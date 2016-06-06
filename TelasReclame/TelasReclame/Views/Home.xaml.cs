@@ -32,14 +32,14 @@ namespace TelasReclame.Views
         {
             this.InitializeComponent();
             myApp = (App)App.Current;
-            DataContext = myApp.Reclamacoes;
+            DataContext = myApp.ColecaoReclamacoes;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-            if (myApp.Reclamacoes.ListaReclamacoes.Count > 0)
+            if (myApp.ColecaoReclamacoes.Reclamacoes.Count > 0)
             {
                 TextoZeroReclamacoes.Visibility = Visibility.Collapsed;
                 ViewReclamacoes.Visibility = Visibility.Visible;                
@@ -64,7 +64,7 @@ namespace TelasReclame.Views
         private void ListViewReclamacoes_ItemClick(object sender, ItemClickEventArgs e)
         {
             int id = ((Reclamacao)e.ClickedItem).Id;
-            Frame.Navigate(typeof(EditReclamacao), id);
+            Frame.Navigate(typeof(ViewReclamacao), id);
         }
     }
 }

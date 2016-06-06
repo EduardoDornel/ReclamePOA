@@ -5,66 +5,11 @@
     xmlns:local="using:TelasReclame"
     RequestedTheme="Light">
     <Application.Resources>
-        <Style x:Key="SearchBox" TargetType="AutoSuggestBox">
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="IsTabStop" Value="False"/>
-            <Setter Property="TextBoxStyle" Value="{StaticResource AutoSuggestBoxTextBoxStyle}"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="AutoSuggestBox">
-                        <Grid>
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="Orientation">
-                                    <VisualState x:Name="Landscape"/>
-                                    <VisualState x:Name="Portrait"/>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <TextBox x:Name="TextBox" Padding="10,16,0,0" Height="52" ScrollViewer.BringIntoViewOnFocusChange="False" DesiredCandidateWindowAlignment="BottomEdge" Header="{TemplateBinding Header}" Margin="0" PlaceholderText="{TemplateBinding PlaceholderText}" BorderThickness="0" Width="{TemplateBinding Width}" Canvas.ZIndex="0"/>
-                            <Popup x:Name="SuggestionsPopup">
-                                <Border x:Name="SuggestionsContainer" BorderThickness="0">
-                                    <Border.RenderTransform>
-                                        <TranslateTransform x:Name="UpwardTransform"/>
-                                    </Border.RenderTransform>
-                                    <ListView x:Name="SuggestionsList" BorderBrush="{ThemeResource SystemControlForegroundChromeHighBrush}" BorderThickness="{ThemeResource AutoSuggestListBorderThemeThickness}" Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" DisplayMemberPath="{TemplateBinding DisplayMemberPath}" IsItemClickEnabled="True" ItemTemplate="{TemplateBinding ItemTemplate}" ItemContainerStyle="{TemplateBinding ItemContainerStyle}" ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}" MaxHeight="{ThemeResource AutoSuggestListMaxHeight}" Margin="{ThemeResource AutoSuggestListMargin}" Padding="{ThemeResource AutoSuggestListPadding}">
-                                        <ListView.ItemContainerTransitions>
-                                            <TransitionCollection/>
-                                        </ListView.ItemContainerTransitions>
-                                    </ListView>
-                                </Border>
-                            </Popup>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <DataTemplate x:Key="TemplateReclamacao">
-            <RelativePanel Background="DarkOrange" Margin="0,12">
-                <Rectangle x:Name="ReclamacaoFigure" HorizontalAlignment="Stretch" Width="150" Height="150">
-                    <Rectangle.Fill>
-                        <ImageBrush Stretch="UniformToFill" ImageSource="{Binding URLImagem}"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-                <TextBlock x:Name="IconCategoria"
-                           Text="&#xE81D;" FontFamily="Segoe MDL2 Assets" FontSize="16"
-                           Margin="8" RelativePanel.RightOf="ReclamacaoFigure"/>
-                <TextBlock x:Name="LabelCategoria"  Text="{Binding Categoria}"
-                           FontSize="16" FontWeight="Bold"
-                           RelativePanel.RightOf="IconCategoria" RelativePanel.AlignVerticalCenterWith="IconCategoria"/>
-                <TextBlock x:Name="LabelBairro" Text="{Binding Bairro}"
-                           FontSize="16"
-                           RelativePanel.Below="LabelCategoria"
-                           RelativePanel.AlignLeftWith="LabelCategoria"/>
-                <TextBlock x:Name="IconCurtidas"
-                           Text="&#xE8E1;" FontFamily="Segoe MDL2 Assets" FontSize="16"
-                           Margin="8"
-                           RelativePanel.AlignBottomWithPanel="True"
-                           RelativePanel.AlignLeftWith="IconCategoria" />
-                <TextBlock x:Name="LabelCurtidas" Text="{Binding Curtidas}"
-                           FontSize="16" FontWeight="Bold"
-                           RelativePanel.RightOf="IconCategoria" RelativePanel.AlignVerticalCenterWith="IconCurtidas"/>
-            </RelativePanel>
-        </DataTemplate>
-        
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/MyStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 
 </Application>

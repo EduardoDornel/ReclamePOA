@@ -35,7 +35,7 @@
         </RelativePanel>
 
         <!--In case of no content-->
-        <StackPanel x:Name="TextoZeroReclamacoes" Grid.Row="1" Background="Yellow">
+        <StackPanel x:Name="TextoZeroReclamacoes" Grid.Row="1" Background="Yellow" Visibility="Collapsed">
             <TextBlock Text="Parece que não há nada aqui!"
                        FontSize="32" TextWrapping="Wrap"
                        FontWeight="Black"
@@ -46,8 +46,8 @@
         </StackPanel>        
         
         <!--Content-->
-        <ScrollViewer x:Name="ViewReclamacoes" Grid.Row="1" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
-            <ListView x:Name="ListViewReclamacoes" ItemsSource="{Binding ListaReclamacoes}"                      
+        <ScrollViewer x:Name="ViewReclamacoes" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ListView x:Name="ListViewReclamacoes" ItemsSource="{Binding Reclamacoes}"                      
                       ItemTemplate="{StaticResource TemplateReclamacao}"
                       SelectionMode="None" IsItemClickEnabled="True"
                       ItemClick="ListViewReclamacoes_ItemClick">

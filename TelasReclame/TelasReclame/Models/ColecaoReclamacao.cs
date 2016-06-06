@@ -11,16 +11,16 @@ namespace TelasReclame.Models
 
         public ColecaoReclamacao()
         {
-            listaReclamacoes = new List<Reclamacao>();
+            reclamacoes = new List<Reclamacao>();
         }
 
-        private List<Reclamacao> listaReclamacoes;
+        private List<Reclamacao> reclamacoes;
 
-        public List<Reclamacao> ListaReclamacoes { get { return listaReclamacoes; } }                
+        public List<Reclamacao> Reclamacoes { get { return reclamacoes; } }                
 
         async public Task<bool> Save()
         {
-            return await StorageHelper.WriteFileAsync("Reclamacoes.json", listaReclamacoes,
+            return await StorageHelper.WriteFileAsync("Reclamacoes.json", reclamacoes,
            StorageHelper.StorageStrategies.Local);
         }
         
@@ -29,9 +29,9 @@ namespace TelasReclame.Models
             bool ok = false;
             try
             {
-                listaReclamacoes = await StorageHelper.ReadFileAsync<List<Reclamacao>>("Reclamacoes.json",
+                reclamacoes = await StorageHelper.ReadFileAsync<List<Reclamacao>>("Reclamacoes.json",
                 StorageHelper.StorageStrategies.Local);
-                if (listaReclamacoes != null)
+                if (reclamacoes != null)
                 {
                     ok = true;
                 }

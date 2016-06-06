@@ -1,0 +1,34 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+
+    <DataTemplate x:Key="TemplateReclamacao">
+        <RelativePanel Background="DarkOrange" Margin="0,12">
+            <Rectangle x:Name="ReclamacaoFigure" HorizontalAlignment="Stretch" Width="150" Height="150">
+                <Rectangle.Fill>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="{Binding URLImagem}"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <TextBlock x:Name="IconCategoria"
+                           Text="&#xE81D;" FontFamily="Segoe MDL2 Assets" FontSize="16"
+                           Margin="8" RelativePanel.RightOf="ReclamacaoFigure"/>
+            <TextBlock x:Name="LabelCategoria"  Text="{Binding Categoria}"
+                           FontSize="16" FontWeight="Bold"
+                           RelativePanel.RightOf="IconCategoria" RelativePanel.AlignVerticalCenterWith="IconCategoria"/>
+            <TextBlock x:Name="LabelBairro" Text="{Binding Bairro}"
+                           FontSize="16"
+                           RelativePanel.Below="LabelCategoria"
+                           RelativePanel.AlignLeftWith="LabelCategoria"/>
+            <TextBlock x:Name="IconCurtidas"
+                           Text="&#xE8E1;" FontFamily="Segoe MDL2 Assets" FontSize="16"
+                           Margin="8"
+                           RelativePanel.AlignBottomWithPanel="True"
+                           RelativePanel.AlignLeftWith="IconCategoria" />
+            <TextBlock x:Name="LabelCurtidas" Text="{Binding Curtidas}"
+                           FontSize="16" FontWeight="Bold"
+                           RelativePanel.RightOf="IconCategoria" RelativePanel.AlignVerticalCenterWith="IconCurtidas"/>
+        </RelativePanel>
+    </DataTemplate>
+
+</ResourceDictionary>

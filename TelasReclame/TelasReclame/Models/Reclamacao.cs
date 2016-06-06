@@ -12,7 +12,8 @@ namespace TelasReclame.Models
         public Reclamacao ()
         {
             URLImagem = null;
-            Curtidas = 0;
+            Curtidas = new List<Usuario>();
+            QtdCurtidas = 0;
             estaResolvida = false;
         }     
 
@@ -22,7 +23,8 @@ namespace TelasReclame.Models
         public string Endereco { get; set; }
         public string Descricao { get; set; }
         public string URLImagem { get; set; }
-        public int Curtidas { get; set; }
+        public List<Usuario> Curtidas { get; set; }
+        public int QtdCurtidas { get; set; }
         public DateTime DataCriacao { get; set; }
         public bool estaResolvida { get; set; }
         public DateTime DataResolucao { get; set; }                        

@@ -31,6 +31,7 @@ namespace TelasReclame.Views
     {
 
         public AddReclamacaoViewModel ViewModel { get; set; }
+        public BitmapImage ImagemPadrao { get; set; }
         App myApp = (App)App.Current;
         
 
@@ -44,6 +45,7 @@ namespace TelasReclame.Views
             this.InitializeComponent();
             ViewModel = new AddReclamacaoViewModel();
             DataContext = ViewModel;
+            ImagemPadrao = new BitmapImage(new Uri(this.BaseUri, "/Assets/nopicdefault.png"));
         }
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -60,15 +62,15 @@ namespace TelasReclame.Views
             {            
                 App myApp = (App)App.Current;
                 ViewModel.ReclamacaoAtual.DataCriacao = DateTime.Now;           
-                myApp.Reclamacoes.ListaReclamacoes.Add(ViewModel.ReclamacaoAtual);
-                bool ok = await myApp.Reclamacoes.Save();
+                myApp.ColecaoReclamacoes.Reclamacoes.Add(ViewModel.ReclamacaoAtual);
+                bool ok = await myApp.ColecaoReclamacoes.Save();
                 if (ok)
                 {                    
                     this.Frame.GoBack();
                 }
                 else
                 {
-                    myApp.Reclamacoes.ListaReclamacoes.RemoveAt(myApp.Reclamacoes.ListaReclamacoes.Count - 1);
+                    myApp.ColecaoReclamacoes.Reclamacoes.RemoveAt(myApp.ColecaoReclamacoes.Reclamacoes.Count - 1);
                     var dialog = new MessageDialog("Falha no armazenamento da reclamação.");
                     await dialog.ShowAsync();
                 }
@@ -107,12 +109,9 @@ namespace TelasReclame.Views
         }
 
         private void RemoveImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (File.Exists(ViewModel.ReclamacaoAtual.URLImagem))
-                File.Delete(ViewModel.ReclamacaoAtual.URLImagem);
-            ViewModel.ReclamacaoAtual.URLImagem = null;
-            BitmapImage imagemPadrao = new BitmapImage(new Uri(this.BaseUri, "/Assets/nopicdefault.png"));
-            ImagemRetangulo.Source = imagemPadrao;
+        {            
+            ViewModel.ReclamacaoAtual.URLImagem = null;            
+            ImagemRetangulo.Source = ImagemPadrao;
         }
     }
 }
