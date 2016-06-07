@@ -32,14 +32,14 @@ namespace TelasReclame.Views
         {
             this.InitializeComponent();
             myApp = (App)App.Current;
-            DataContext = myApp.ColecaoReclamacoes;
+            DataContext = myApp.AppReclamacoes;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-            if (myApp.ColecaoReclamacoes.Reclamacoes.Count > 0)
+            if (myApp.AppReclamacoes.Reclamacoes.Count > 0)
             {
                 TextoZeroReclamacoes.Visibility = Visibility.Collapsed;
                 ViewReclamacoes.Visibility = Visibility.Visible;                

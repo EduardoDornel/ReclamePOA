@@ -24,9 +24,9 @@ namespace TelasReclame.ViewModels
             // Preenche as listas de categorias e bairros
             Categorias = PreencheDados.Categorias();
             Bairros = PreencheDados.Bairros();
-            // Gera a ID da Reclamação logo após que a instância for criada de acordo com a lista principal de reclamações.
+            // Gera a ID da reclamação logo após que a instância for criada de acordo com a lista principal de reclamações.
             var myApp = (App)App.Current;
-            ReclamacaoAtual.Id = myApp.ColecaoReclamacoes.Reclamacoes.Count;
+            ReclamacaoAtual.Id = myApp.AppReclamacoes.Reclamacoes.Count;
           
             
         }

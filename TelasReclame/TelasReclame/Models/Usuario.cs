@@ -16,21 +16,7 @@ namespace TelasReclame.Models
         public string Nome { get; set; }
 
         public string Senha { get; set; }
-        public string Bairro { get; set; }        
-        // Construtores
-        public Usuario ()
-        {
-
-        }
-
-        public Usuario (string email, string nome, string senha, string bairro)
-        {
-            Email = email;
-            Nome = nome;
-            Senha = senha;
-            Bairro = bairro;
-        }
-
+        public string Bairro { get; set; }
 
     }
 }

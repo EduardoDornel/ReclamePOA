@@ -44,7 +44,7 @@ namespace TelasReclame.Views
             {
                 int id = Convert.ToInt32(e.Parameter);
                 App minhaApp = (App)App.Current;
-                var reclamacao = (from f in minhaApp.ColecaoReclamacoes.Reclamacoes
+                var reclamacao = (from f in minhaApp.AppReclamacoes.Reclamacoes
                                   where f.Id == id
                                   select f).FirstOrDefault();
                 this.ViewModel.ReclamacaoAtual = reclamacao;
@@ -59,7 +59,7 @@ namespace TelasReclame.Views
 
         private void ToggleLike_Checked(object sender, RoutedEventArgs e)
         {
-            ViewModel.ReclamacaoAtual.Curtidas += 1;            
+            //ViewModel.ReclamacaoAtual.Curtidas += 1;            
         }
     }
 }

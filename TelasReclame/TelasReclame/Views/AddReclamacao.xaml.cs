@@ -29,17 +29,12 @@ namespace TelasReclame.Views
     /// </summary>
     public sealed partial class AddReclamacao : Page
     {
-
+        // Propriedades
         public AddReclamacaoViewModel ViewModel { get; set; }
         public BitmapImage ImagemPadrao { get; set; }
-        App myApp = (App)App.Current;
-        
+        App myApp = (App)App.Current;                
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {            
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-        }
-
+        // Construtores
         public AddReclamacao()
         {
             this.InitializeComponent();
@@ -48,35 +43,15 @@ namespace TelasReclame.Views
             ImagemPadrao = new BitmapImage(new Uri(this.BaseUri, "/Assets/nopicdefault.png"));
         }
 
-        private async void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (ListCategoria.SelectedIndex <= -1 ||
-                ListBairro.SelectedIndex <= -1 ||
-                string.IsNullOrWhiteSpace(TextBoxEndereco.Text) ||
-                string.IsNullOrWhiteSpace(TextBoxDescricao.Text))
-            {
-                var dialog = new MessageDialog("Favor preencher todos os campos antes de salvar a reclamação.");
-                await dialog.ShowAsync();
-            }
-            else
-            {            
-                App myApp = (App)App.Current;
-                ViewModel.ReclamacaoAtual.DataCriacao = DateTime.Now;           
-                myApp.ColecaoReclamacoes.Reclamacoes.Add(ViewModel.ReclamacaoAtual);
-                bool ok = await myApp.ColecaoReclamacoes.Save();
-                if (ok)
-                {                    
-                    this.Frame.GoBack();
-                }
-                else
-                {
-                    myApp.ColecaoReclamacoes.Reclamacoes.RemoveAt(myApp.ColecaoReclamacoes.Reclamacoes.Count - 1);
-                    var dialog = new MessageDialog("Falha no armazenamento da reclamação.");
-                    await dialog.ShowAsync();
-                }
-            }
-        }
+        // Métodos
 
+        // Executado ao navegar para a página
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+        }        
+
+        // Insere nova imagem ou substitui a antiga se ela já existe
         private async void ImagePickerButton_Click(object sender, RoutedEventArgs e)
         {            
             FileOpenPicker openPicker = new FileOpenPicker();            
@@ -100,18 +75,50 @@ namespace TelasReclame.Views
                 ImagemRetangulo.Source = imageBitmap;                    
             }
 
-        }       
+        }
+
+        // Remove imagem já adicionada
+        private void RemoveImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.ReclamacaoAtual.URLImagem = null;
+            ImagemRetangulo.Source = ImagemPadrao;
+        }
+
+        // Salva nova reclamação
+        private async void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Valida se todas as informações estão preenchidas
+            if (ListCategoria.SelectedIndex <= -1 ||
+                ListBairro.SelectedIndex <= -1 ||
+                string.IsNullOrWhiteSpace(TextBoxEndereco.Text) ||
+                string.IsNullOrWhiteSpace(TextBoxDescricao.Text))
+            {
+                var dialog = new MessageDialog("Favor preencher todos os campos antes de salvar a reclamação.");
+                await dialog.ShowAsync();
+            }
+            else
+            {                
+                ViewModel.ReclamacaoAtual.DataCriacao = DateTime.Now;
+                myApp.AppReclamacoes.Reclamacoes.Add(ViewModel.ReclamacaoAtual);
+                bool ok = await myApp.AppReclamacoes.Save();
+                if (ok)
+                {
+                    this.Frame.GoBack();
+                }
+                else
+                {
+                    myApp.AppReclamacoes.Reclamacoes.RemoveAt(myApp.AppReclamacoes.Reclamacoes.Count - 1);
+                    var dialog = new MessageDialog("Falha no armazenamento da reclamação.");
+                    await dialog.ShowAsync();
+                }
+            }
+        }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             if (Frame.CanGoBack)
                 Frame.GoBack();
         }
-
-        private void RemoveImageButton_Click(object sender, RoutedEventArgs e)
-        {            
-            ViewModel.ReclamacaoAtual.URLImagem = null;            
-            ImagemRetangulo.Source = ImagemPadrao;
-        }
+        
     }
 }

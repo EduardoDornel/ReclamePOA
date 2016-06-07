@@ -42,7 +42,7 @@ namespace TelasReclame.Views
             {
                 int id = Convert.ToInt32(e.Parameter);
                 App minhaApp = (App)App.Current;
-                var reclamacao = (from f in minhaApp.ColecaoReclamacoes.Reclamacoes
+                var reclamacao = (from f in minhaApp.AppReclamacoes.Reclamacoes
                                   where f.Id == id
                                   select f).FirstOrDefault();
                 this.ViewModel.ReclamacaoAtual = reclamacao;
@@ -107,16 +107,16 @@ namespace TelasReclame.Views
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             App myApp = (App)App.Current;
-            var posicaoAlterado = myApp.ColecaoReclamacoes.Reclamacoes.FindIndex(p => p.Id == ViewModel.ReclamacaoTemporaria.Id);
-            myApp.ColecaoReclamacoes.Reclamacoes[posicaoAlterado] = ViewModel.ReclamacaoTemporaria;
-            bool ok = await myApp.ColecaoReclamacoes.Save();
+            var posicaoAlterado = myApp.AppReclamacoes.Reclamacoes.FindIndex(p => p.Id == ViewModel.ReclamacaoTemporaria.Id);
+            myApp.AppReclamacoes.Reclamacoes[posicaoAlterado] = ViewModel.ReclamacaoTemporaria;
+            bool ok = await myApp.AppReclamacoes.Save();
             if (ok)
             {                                
                 this.Frame.GoBack();
             }
             else
             {
-                myApp.ColecaoReclamacoes.Reclamacoes.RemoveAt(myApp.ColecaoReclamacoes.Reclamacoes.Count - 1);
+                myApp.AppReclamacoes.Reclamacoes.RemoveAt(myApp.AppReclamacoes.Reclamacoes.Count - 1);
                 var dialog = new MessageDialog("Falha ao salvar a reclamação.");
                 await dialog.ShowAsync();
             }
@@ -155,16 +155,16 @@ namespace TelasReclame.Views
 
             {
                 var reclamacaoRemovida = ViewModel.ReclamacaoAtual;
-                var posicaoRemocao = myApp.ColecaoReclamacoes.Reclamacoes.FindIndex(p => p.Id == reclamacaoRemovida.Id);
-                myApp.ColecaoReclamacoes.Reclamacoes.RemoveAt(posicaoRemocao);
-                bool ok = await myApp.ColecaoReclamacoes.Save();
+                var posicaoRemocao = myApp.AppReclamacoes.Reclamacoes.FindIndex(p => p.Id == reclamacaoRemovida.Id);
+                myApp.AppReclamacoes.Reclamacoes.RemoveAt(posicaoRemocao);
+                bool ok = await myApp.AppReclamacoes.Save();
                 if (ok)
                 {                                        
                     this.Frame.GoBack();
                 }
                 else
                 {
-                    myApp.ColecaoReclamacoes.Reclamacoes.Insert(posicaoRemocao, reclamacaoRemovida);
+                    myApp.AppReclamacoes.Reclamacoes.Insert(posicaoRemocao, reclamacaoRemovida);
                     var dialog = new MessageDialog("Falha ao remover reclamação.");
                     await dialog.ShowAsync();
                 }

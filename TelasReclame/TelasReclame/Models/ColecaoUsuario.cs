@@ -6,36 +6,35 @@ using System.Threading.Tasks;
 
 namespace TelasReclame.Models
 {
-    public class ColecaoReclamacao
+    public class ColecaoUsuario
     {
-
         // Atributos
-        private List<Reclamacao> reclamacoes;
-
+        private List<Usuario> usuarios;        
+        
         // Propriedades
-        public List<Reclamacao> Reclamacoes { get { return reclamacoes; } }                
+        public List<Usuario> Usuarios { get { return usuarios; } }
 
         // Construtores
-        public ColecaoReclamacao()
+        public ColecaoUsuario()
         {
-            reclamacoes = new List<Reclamacao>();
+            usuarios = new List<Usuario>();
         }
 
         // Métodos
         async public Task<bool> Save()
         {
-            return await StorageHelper.WriteFileAsync("Reclamacoes.json", reclamacoes,
+            return await StorageHelper.WriteFileAsync("Usuarios.json", usuarios,
            StorageHelper.StorageStrategies.Local);
         }
-        
+
         public async Task<bool> Load()
         {
             bool ok = false;
             try
             {
-                reclamacoes = await StorageHelper.ReadFileAsync<List<Reclamacao>>("Reclamacoes.json",
+                usuarios = await StorageHelper.ReadFileAsync<List<Usuario>>("Usuarios.json",
                 StorageHelper.StorageStrategies.Local);
-                if (reclamacoes != null)
+                if (usuarios != null)
                 {
                     ok = true;
                 }
@@ -45,6 +44,6 @@ namespace TelasReclame.Models
                 string mensagem = e.Message;
             }
             return ok;
-        }    
+        }
     }
 }

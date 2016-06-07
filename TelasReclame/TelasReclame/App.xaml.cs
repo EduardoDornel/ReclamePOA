@@ -24,7 +24,8 @@ namespace TelasReclame
     sealed partial class App : Application
     {        
 
-        public ColecaoReclamacao ColecaoReclamacoes { get; set; }
+        public ColecaoReclamacao AppReclamacoes { get; set; }
+        public ColecaoUsuario AppUsuarios { get; set; }
         public Usuario UsuarioLogado { get; set; }
 
         /// <summary>
@@ -35,7 +36,8 @@ namespace TelasReclame
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            ColecaoReclamacoes = new ColecaoReclamacao();
+            AppReclamacoes = new ColecaoReclamacao();
+            AppUsuarios = new ColecaoUsuario();
             UsuarioLogado = new Usuario();
         }
 
@@ -47,18 +49,30 @@ namespace TelasReclame
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
 
-            bool jaExiste = await StorageHelper.FileExistsAsync("Reclamacoes.json");
-            if (!jaExiste)
+            bool jaExisteReclamacao = await StorageHelper.FileExistsAsync("Reclamacoes.json");
+            if (!jaExisteReclamacao)
             {
-                await ColecaoReclamacoes.Save();
+                await AppReclamacoes.Save();
             }
             else
             {
-                await ColecaoReclamacoes.Load();
+                await AppReclamacoes.Load();
             }
-            
 
-                        Frame rootFrame = Window.Current.Content as Frame;
+            bool jaExisteUsuario = await StorageHelper.FileExistsAsync("Usuarios.json");
+            if (!jaExisteUsuario)
+            {
+                await AppUsuarios.Save();
+            }
+            else
+            {
+                await AppUsuarios.Load();
+            }
+
+
+
+
+            Frame rootFrame = Window.Current.Content as Frame;
 
             // Não repita a inicialização do aplicativo quando a Janela já tiver conteúdo,
             // apenas verifique se a janela está ativa
@@ -85,7 +99,7 @@ namespace TelasReclame
                     // Quando a pilha de navegação não for restaurada, navegar para a primeira página,
                     // configurando a nova página passando as informações necessárias como um parâmetro
                     // parâmetro
-                    rootFrame.Navigate(typeof(Views.Shell), e.Arguments);
+                    rootFrame.Navigate(typeof(Views.Login), e.Arguments);
                 }
                 // Verifique se a janela atual está ativa
                 Window.Current.Activate();
