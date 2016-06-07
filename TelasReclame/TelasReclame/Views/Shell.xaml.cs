@@ -27,7 +27,6 @@ namespace TelasReclame.Views
         {
             this.InitializeComponent();
             PageFrame.Navigate(typeof(Home));            
-            HamburgerItemHome.IsSelected = true;
             SystemNavigationManager.GetForCurrentView().BackRequested += (s, e) =>
             {
                 // This is the missing line!

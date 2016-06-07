@@ -29,7 +29,7 @@
                      />
             <PasswordBox x:Name="PasswordBoxSenha"
                      Header="Senha" MaxWidth="350"
-                     Password="{Binding UsuarioNovo.Senha}"
+                     Password="{Binding UsuarioNovo.Senha, Mode=TwoWay}"
                      Margin="12,0,12,24"
                      />
             <PasswordBox x:Name="PasswordBoxRepeteSenha"

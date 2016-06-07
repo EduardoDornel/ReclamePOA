@@ -27,6 +27,20 @@ namespace TelasReclame.Models
         public int QtdCurtidas { get; set; }
         public DateTime DataCriacao { get; set; }
         public bool estaResolvida { get; set; }
-        public DateTime DataResolucao { get; set; }                        
+        public DateTime DataResolucao { get; set; } 
+        
+        public string DescricaoCurta
+        {
+            get
+            {
+                string descricaoCurta = Descricao;
+                if (Descricao.Length > 200) { 
+                    descricaoCurta = descricaoCurta.Substring(0, 200);
+                    descricaoCurta.TrimEnd();
+                    descricaoCurta += "...";
+                }
+                return descricaoCurta;
+            }
+        }                       
     }
 }

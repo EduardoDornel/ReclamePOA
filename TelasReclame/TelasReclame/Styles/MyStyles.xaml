@@ -4,30 +4,62 @@
     >
 
     <DataTemplate x:Key="TemplateReclamacao">
-        <RelativePanel Background="DarkOrange" Margin="0,12">
-            <Rectangle x:Name="ReclamacaoFigure" HorizontalAlignment="Stretch" Width="150" Height="150">
+        <RelativePanel Background="Orange" Margin="0,12" MaxHeight="150">
+            <Rectangle x:Name="ReclamacaoFigure" Width="150" Height="150">
                 <Rectangle.Fill>
                     <ImageBrush Stretch="UniformToFill" ImageSource="{Binding URLImagem}"/>
                 </Rectangle.Fill>
             </Rectangle>
             <TextBlock x:Name="IconCategoria"
-                           Text="&#xE81D;" FontFamily="Segoe MDL2 Assets" FontSize="16"
+                           Text="&#xE8EC;" FontFamily="Segoe MDL2 Assets" FontSize="16"
                            Margin="8" RelativePanel.RightOf="ReclamacaoFigure"/>
             <TextBlock x:Name="LabelCategoria"  Text="{Binding Categoria}"
                            FontSize="16" FontWeight="Bold"
-                           RelativePanel.RightOf="IconCategoria" RelativePanel.AlignVerticalCenterWith="IconCategoria"/>
+                           RelativePanel.RightOf="IconCategoria" 
+                           RelativePanel.AlignVerticalCenterWith="IconCategoria"/>
+            <Border BorderThickness="2"                    
+                    BorderBrush="Red"
+                    CornerRadius="5"
+                    Padding="3"
+                    RelativePanel.AlignRightWithPanel="True"
+                    Margin="8"
+                    >
+                <TextBlock x:Name="LabelEstaResolvido"
+                           Text="Não Resolvido"
+                           Foreground="Red"
+                           FontSize="16" FontWeight="Bold"                           
+                           />
+            </Border>
+            <TextBlock x:Name="IconBairro"
+                       Text="&#xE707;" FontFamily="Segoe MDL2 Assets" FontSize="16"
+                       Margin="8"
+                       RelativePanel.AlignLeftWith="IconCategoria"                       
+                       RelativePanel.Below="IconCategoria"/>
             <TextBlock x:Name="LabelBairro" Text="{Binding Bairro}"
-                           FontSize="16"
-                           RelativePanel.Below="LabelCategoria"
-                           RelativePanel.AlignLeftWith="LabelCategoria"/>
+                       FontSize="16" FontWeight="Bold"
+                       RelativePanel.RightOf="IconBairro" 
+                       RelativePanel.AlignVerticalCenterWith="IconBairro"/>
             <TextBlock x:Name="IconCurtidas"
-                           Text="&#xE8E1;" FontFamily="Segoe MDL2 Assets" FontSize="16"
-                           Margin="8"
-                           RelativePanel.AlignBottomWithPanel="True"
-                           RelativePanel.AlignLeftWith="IconCategoria" />
-            <TextBlock x:Name="LabelCurtidas" Text="{Binding Curtidas}"
-                           FontSize="16" FontWeight="Bold"
-                           RelativePanel.RightOf="IconCategoria" RelativePanel.AlignVerticalCenterWith="IconCurtidas"/>
+                       Text="&#xE8E1;" FontFamily="Segoe MDL2 Assets" FontSize="16"
+                       Margin="8"                       
+                       RelativePanel.AlignBottomWithPanel="True"
+                       RelativePanel.AlignLeftWith="IconCategoria" />
+            <TextBlock x:Name="LabelCurtidas" Text="{Binding QtdCurtidas}"
+                       FontSize="16" FontWeight="Bold"                       
+                       RelativePanel.RightOf="IconCategoria"
+                       RelativePanel.AlignVerticalCenterWith="IconCurtidas"/>
+            <TextBlock x:Name="IconDataCriacao"
+                       Text="&#xE8BF;" FontFamily="Segoe MDL2 Assets" FontSize="16"
+                       Margin="8"
+                       RelativePanel.AlignBottomWithPanel="True"
+                       RelativePanel.LeftOf="LabelDataCriacao"
+                       />
+            <TextBlock x:Name="LabelDataCriacao"
+                       Text="{Binding DataCriacao}"
+                       Margin="8"
+                       RelativePanel.AlignBottomWithPanel="True"
+                       RelativePanel.AlignRightWithPanel="True"
+                       />
         </RelativePanel>
     </DataTemplate>
 

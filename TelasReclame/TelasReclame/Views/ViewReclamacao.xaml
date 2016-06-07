@@ -26,10 +26,11 @@
                               RelativePanel.Below="ComplaintImage"
                               RelativePanel.AlignRightWithPanel="True"                              
                               Margin="12"                              
-                              Checked="ToggleLike_Checked">
+                              Checked="ToggleLike_Checked"
+                              Unchecked="ToggleLike_Unchecked">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon x:Name="IconeLike" Symbol="Like" />
-                        <TextBlock x:Name="NumeroLike" Text="{Binding ReclamacaoAtual.Curtidas}" />
+                        <TextBlock x:Name="NumeroLike" Text="{Binding ReclamacaoAtual.QtdCurtidas}" Padding="12,0,0,0"/>
                     </StackPanel>
                 </ToggleButton>
                 <TextBlock x:Name="ComplaintBairro"

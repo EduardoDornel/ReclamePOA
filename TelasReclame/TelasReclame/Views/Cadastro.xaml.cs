@@ -26,7 +26,7 @@ namespace TelasReclame.Views
     public sealed partial class Cadastro : Page
     {
         // Propriedades        
-        public CadastroViewModel ViewModel { get; set; }         
+        public CadastroViewModel ViewModel { get; set; }
 
         // Construtores
         public Cadastro()
@@ -76,7 +76,7 @@ namespace TelasReclame.Views
                 default:
                     App myApp = (App)App.Current;
                     myApp.AppUsuarios.Usuarios.Add(ViewModel.UsuarioNovo);
-                    bool ok = await myApp.AppReclamacoes.Save();
+                    bool ok = await myApp.AppUsuarios.Save();
                     if (ok)
                     {                        
                         var dialog = new MessageDialog("Usuário(a) " + ViewModel.UsuarioNovo.Nome + " cadastrado com sucesso!");

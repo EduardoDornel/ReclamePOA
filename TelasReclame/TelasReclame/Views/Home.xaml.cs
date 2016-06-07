@@ -26,7 +26,8 @@ namespace TelasReclame.Views
     public sealed partial class Home : Page
     {       
 
-        App myApp { get; set; }
+        // Propriedades
+        App myApp { get; set; }        
 
         public Home()
         {
@@ -49,6 +50,8 @@ namespace TelasReclame.Views
                 TextoZeroReclamacoes.Visibility = Visibility.Visible;
                 ViewReclamacoes.Visibility = Visibility.Collapsed;
             }
+
+
         }        
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)

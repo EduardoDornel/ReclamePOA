@@ -99,6 +99,7 @@ namespace TelasReclame.Views
             else
             {                
                 ViewModel.ReclamacaoAtual.DataCriacao = DateTime.Now;
+                ViewModel.ReclamacaoAtual.URLImagem = "ms-appx:///Assets/nopicdefault.png";
                 myApp.AppReclamacoes.Reclamacoes.Add(ViewModel.ReclamacaoAtual);
                 bool ok = await myApp.AppReclamacoes.Save();
                 if (ok)

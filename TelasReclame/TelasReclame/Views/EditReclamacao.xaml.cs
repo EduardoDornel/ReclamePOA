@@ -52,6 +52,7 @@ namespace TelasReclame.Views
                     Bairro = reclamacao.Bairro,
                     Categoria = reclamacao.Categoria,
                     Curtidas = reclamacao.Curtidas,
+                    QtdCurtidas = reclamacao.QtdCurtidas,
                     DataCriacao = reclamacao.DataCriacao,
                     DataResolucao = reclamacao.DataResolucao,
                     Descricao = reclamacao.Descricao,
@@ -159,8 +160,8 @@ namespace TelasReclame.Views
                 myApp.AppReclamacoes.Reclamacoes.RemoveAt(posicaoRemocao);
                 bool ok = await myApp.AppReclamacoes.Save();
                 if (ok)
-                {                                        
-                    this.Frame.GoBack();
+                {
+                    Frame.Navigate(typeof(Home));
                 }
                 else
                 {
