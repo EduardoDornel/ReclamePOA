@@ -19,17 +19,17 @@
                      Margin="20">
             <TextBox x:Name="TextBoxNome"
                      Header="Nome" MaxWidth="350"
-                     Text="{Binding UsuarioNovo.Nome, Mode=TwoWay}"
+                     Text="{x:Bind ViewModel.UsuarioNovo.Nome, Mode=TwoWay}"
                      Margin="12"
                      />
             <TextBox x:Name="TextBoxEmail"
                      Header="E-mail" MaxWidth="350"
-                     Text="{Binding UsuarioNovo.Email, Mode=TwoWay}"
+                     Text="{x:Bind ViewModel.UsuarioNovo.Email, Mode=TwoWay}"
                      Margin="12"
                      />
             <PasswordBox x:Name="PasswordBoxSenha"
                      Header="Senha" MaxWidth="350"
-                     Password="{Binding UsuarioNovo.Senha, Mode=TwoWay}"
+                     Password="{x:Bind ViewModel.UsuarioNovo.Senha, Mode=TwoWay}"
                      Margin="12,0,12,24"
                      />
             <PasswordBox x:Name="PasswordBoxRepeteSenha"
@@ -38,8 +38,8 @@
                          />
             <ComboBox x:Name="ComboBoxBairros"
                       Header="Selecione o seu bairro" MaxWidth="350"
-                      ItemsSource="{Binding Bairros}"                      
-                      SelectedItem="{Binding UsuarioNovo.Bairro, Mode=TwoWay}"
+                      ItemsSource="{x:Bind ViewModel.Bairros}"                      
+                      SelectedItem="{x:Bind ViewModel.UsuarioNovo.Bairro, Mode=TwoWay}"
                       VerticalAlignment="Stretch"                      
                       Margin="12,0,12,24"
                       />

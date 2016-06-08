@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PreencheDados.cs" />
+    <Compile Include="Models\ColecaoComentario.cs" />
     <Compile Include="Models\ColecaoReclamacao.cs" />
     <Compile Include="Models\ColecaoUsuario.cs" />
     <Compile Include="Models\Comentario.cs" />
@@ -105,7 +106,9 @@
     <Compile Include="StorageHelper.cs" />
     <Compile Include="ViewModels\AddReclamacaoViewModel.cs" />
     <Compile Include="ViewModels\CadastroViewModel.cs" />
+    <Compile Include="ViewModels\ComentarioViewModel.cs" />
     <Compile Include="ViewModels\EditReclamacaoViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ViewReclamacaoViewModel.cs" />
     <Compile Include="Views\AddReclamacao.xaml.cs">
@@ -113,6 +116,12 @@
     </Compile>
     <Compile Include="Views\Cadastro.xaml.cs">
       <DependentUpon>Cadastro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Comentarios.xaml.cs">
+      <DependentUpon>Comentarios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetalhesReclamacao.xaml.cs">
+      <DependentUpon>DetalhesReclamacao.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditReclamacao.xaml.cs">
       <DependentUpon>EditReclamacao.xaml</DependentUpon>
@@ -168,6 +177,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Cadastro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Comentarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DetalhesReclamacao.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

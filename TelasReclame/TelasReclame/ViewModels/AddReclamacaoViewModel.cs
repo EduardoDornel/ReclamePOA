@@ -14,21 +14,22 @@ namespace TelasReclame.ViewModels
         // Propriedades        
         public Reclamacao ReclamacaoAtual { get; set; }
         public List<string> Bairros { get; set; }
-        public List<string> Categorias { get; set; }       
+        public List<string> Categorias { get; set; }
 
         // Construtor
-        public AddReclamacaoViewModel ()
+        public AddReclamacaoViewModel()
         {
             // Instancia nova reclamação
-            ReclamacaoAtual = new Reclamacao();            
+            ReclamacaoAtual = new Reclamacao();
             // Preenche as listas de categorias e bairros
             Categorias = PreencheDados.Categorias();
             Bairros = PreencheDados.Bairros();
-            // Gera a ID da reclamação logo após que a instância for criada de acordo com a lista principal de reclamações.
+            // Gera a ID e Criador da reclamação logo após que a instância for criada de acordo com a lista principal de reclamações.
             var myApp = (App)App.Current;
             ReclamacaoAtual.Id = myApp.AppReclamacoes.Reclamacoes.Count;
-          
-            
+            ReclamacaoAtual.Criador = myApp.UsuarioLogado;
+
+
         }
     }
 }

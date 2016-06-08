@@ -24,8 +24,9 @@ namespace TelasReclame
     sealed partial class App : Application
     {        
 
-        public ColecaoReclamacao AppReclamacoes { get; set; }
         public ColecaoUsuario AppUsuarios { get; set; }
+        public ColecaoReclamacao AppReclamacoes { get; set; }
+        public ColecaoComentario AppComentarios { get; set; }
         public Usuario UsuarioLogado { get; set; }
 
         /// <summary>
@@ -36,8 +37,9 @@ namespace TelasReclame
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            AppReclamacoes = new ColecaoReclamacao();
             AppUsuarios = new ColecaoUsuario();
+            AppReclamacoes = new ColecaoReclamacao();
+            AppComentarios = new ColecaoComentario();
             UsuarioLogado = new Usuario();
         }
 
@@ -48,6 +50,15 @@ namespace TelasReclame
         /// <param name="e">Detalhes sobre a solicitação e o processo de inicialização.</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
+            bool jaExisteUsuario = await StorageHelper.FileExistsAsync("Usuarios.json");
+            if (!jaExisteUsuario)
+            {
+                await AppUsuarios.Save();
+            }
+            else
+            {
+                await AppUsuarios.Load();
+            }
 
             bool jaExisteReclamacao = await StorageHelper.FileExistsAsync("Reclamacoes.json");
             if (!jaExisteReclamacao)
@@ -59,8 +70,9 @@ namespace TelasReclame
                 await AppReclamacoes.Load();
             }
 
-            bool jaExisteUsuario = await StorageHelper.FileExistsAsync("Usuarios.json");
-            if (!jaExisteUsuario)
+
+            bool jaExisteComentario = await StorageHelper.FileExistsAsync("Comentario.json");
+            if (!jaExisteComentario)
             {
                 await AppUsuarios.Save();
             }

@@ -5,8 +5,71 @@
     xmlns:local="using:TelasReclame.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:TelasReclame.Models"
     mc:Ignorable="d"
     >
+    <Page.Resources>
+
+        <DataTemplate x:Key="TemplateReclamacao" x:DataType="data:Reclamacao">
+            <RelativePanel Background="Orange" Margin="0,12" MaxHeight="150">
+                <Rectangle x:Name="ReclamacaoFigure" Width="150" Height="150">
+                    <Rectangle.Fill>
+                        <ImageBrush Stretch="UniformToFill" ImageSource="{Binding URLImagem}"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock x:Name="IconCategoria"
+                           Text="&#xE8EC;" FontFamily="Segoe MDL2 Assets" FontSize="16"
+                           Margin="8" RelativePanel.RightOf="ReclamacaoFigure"/>
+                <TextBlock x:Name="LabelCategoria"  Text="{x:Bind Categoria}"
+                           FontSize="16" FontWeight="Bold"
+                           RelativePanel.RightOf="IconCategoria" 
+                           RelativePanel.AlignVerticalCenterWith="IconCategoria"/>
+                <Border BorderThickness="2"                    
+                    BorderBrush="Red"
+                    CornerRadius="5"
+                    Padding="3"
+                    RelativePanel.AlignRightWithPanel="True"
+                    Margin="8"
+                    >
+                    <TextBlock x:Name="LabelEstaResolvido"
+                           Text="Não Resolvido"
+                           Foreground="Red"
+                           FontSize="16" FontWeight="Bold"                           
+                           />
+                </Border>
+                <TextBlock x:Name="IconBairro"
+                       Text="&#xE707;" FontFamily="Segoe MDL2 Assets" FontSize="16"
+                       Margin="8"
+                       RelativePanel.AlignLeftWith="IconCategoria"                       
+                       RelativePanel.Below="IconCategoria"/>
+                <TextBlock x:Name="LabelBairro" Text="{x:Bind Bairro}"
+                       FontSize="16" FontWeight="Bold"
+                       RelativePanel.RightOf="IconBairro" 
+                       RelativePanel.AlignVerticalCenterWith="IconBairro"/>
+                <TextBlock x:Name="IconCurtidas"
+                       Text="&#xE8E1;" FontFamily="Segoe MDL2 Assets" FontSize="16"
+                       Margin="8"                       
+                       RelativePanel.AlignBottomWithPanel="True"
+                       RelativePanel.AlignLeftWith="IconCategoria" />
+                <TextBlock x:Name="LabelCurtidas" Text="{x:Bind QtdCurtidas}"
+                       FontSize="16" FontWeight="Bold"                       
+                       RelativePanel.RightOf="IconCategoria"
+                       RelativePanel.AlignVerticalCenterWith="IconCurtidas"/>
+                <TextBlock x:Name="IconDataCriacao"
+                       Text="&#xE8BF;" FontFamily="Segoe MDL2 Assets" FontSize="16"
+                       Margin="8"
+                       RelativePanel.AlignBottomWithPanel="True"
+                       RelativePanel.LeftOf="LabelDataCriacao"
+                       />
+                <TextBlock x:Name="LabelDataCriacao"
+                       Text="{x:Bind DataCriacao}"
+                       Margin="8"
+                       RelativePanel.AlignBottomWithPanel="True"
+                       RelativePanel.AlignRightWithPanel="True"
+                       />
+            </RelativePanel>
+        </DataTemplate>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -23,15 +86,6 @@
                        Text="Início"                       
                        RelativePanel.AlignVerticalCenterWithPanel="True"
                        Padding="20,0,0,0" />
-            <Button x:Name="SearchButton"                                                            
-                    FontFamily="Segoe MDL2 Assets"
-                    Content="&#xE721;"
-                    Width="52"
-                    Height="52"                    
-                    Click="SearchButton_Click" 
-                    Background="Transparent"
-                    RelativePanel.AlignRightWithPanel="True"                    
-                    />
         </RelativePanel>
 
         <!--In case of no content-->
@@ -43,14 +97,13 @@
                        TextAlignment="Center"/>
             <TextBlock TextWrapping="Wrap" TextAlignment="Center"
                        Margin="18">Para começar, adicione alguma reclamação com o botão <Bold>"+"</Bold> na barra inferior.</TextBlock>
-        </StackPanel>        
-        
+        </StackPanel>
+
         <!--Content-->
         <ScrollViewer x:Name="ViewReclamacoes" Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <ListView x:Name="ListViewReclamacoes" ItemsSource="{Binding Reclamacoes}"                      
-                      ItemTemplate="{StaticResource TemplateReclamacao}"
-                      SelectionMode="None" IsItemClickEnabled="True"
-                      ItemClick="ListViewReclamacoes_ItemClick">
+            <ListView x:Name="ListViewReclamacoes" ItemsSource="{x:Bind ViewModel.Reclamacoes}"                      
+                      SelectionMode="None" IsItemClickEnabled="True"                      
+                      ItemClick="ListViewReclamacoes_ItemClick" SelectionChanged="ListViewReclamacoes_SelectionChanged" ItemTemplate="{StaticResource TemplateReclamacao}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment"
@@ -59,7 +112,7 @@
                 </ListView.ItemContainerStyle>
             </ListView>
         </ScrollViewer>
-        
+
         <!--Bottom-->
         <CommandBar x:Name="MainCommandBar"
                     Grid.Row="2"

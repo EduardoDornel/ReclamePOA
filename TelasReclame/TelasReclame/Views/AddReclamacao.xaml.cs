@@ -32,7 +32,7 @@ namespace TelasReclame.Views
         // Propriedades
         public AddReclamacaoViewModel ViewModel { get; set; }
         public BitmapImage ImagemPadrao { get; set; }
-        App myApp = (App)App.Current;                
+        App myApp = (App)App.Current;
 
         // Construtores
         public AddReclamacao()
@@ -49,17 +49,17 @@ namespace TelasReclame.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-        }        
+        }
 
         // Insere nova imagem ou substitui a antiga se ela já existe
         private async void ImagePickerButton_Click(object sender, RoutedEventArgs e)
-        {            
-            FileOpenPicker openPicker = new FileOpenPicker();            
+        {
+            FileOpenPicker openPicker = new FileOpenPicker();
             openPicker.ViewMode = PickerViewMode.Thumbnail;
             openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
             openPicker.FileTypeFilter.Add(".jpg");
             openPicker.FileTypeFilter.Add(".jpeg");
-            openPicker.FileTypeFilter.Add(".png");            
+            openPicker.FileTypeFilter.Add(".png");
 
             StorageFile imagem = await openPicker.PickSingleFileAsync();
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
@@ -71,8 +71,8 @@ namespace TelasReclame.Views
                 StorageFile copiaImagem = await imagem.CopyAsync(localFolder, nomeImagem, NameCollisionOption.GenerateUniqueName);
                 ViewModel.ReclamacaoAtual.URLImagem = copiaImagem.Path;
                 Uri imageUri = new Uri(ViewModel.ReclamacaoAtual.URLImagem, UriKind.Relative);
-                BitmapImage imageBitmap = new BitmapImage(imageUri);                
-                ImagemRetangulo.Source = imageBitmap;                    
+                BitmapImage imageBitmap = new BitmapImage(imageUri);
+                ImagemRetangulo.Source = imageBitmap;
             }
 
         }
@@ -97,7 +97,7 @@ namespace TelasReclame.Views
                 await dialog.ShowAsync();
             }
             else
-            {                
+            {
                 ViewModel.ReclamacaoAtual.DataCriacao = DateTime.Now;
                 ViewModel.ReclamacaoAtual.URLImagem = "ms-appx:///Assets/nopicdefault.png";
                 myApp.AppReclamacoes.Reclamacoes.Add(ViewModel.ReclamacaoAtual);
@@ -120,6 +120,6 @@ namespace TelasReclame.Views
             if (Frame.CanGoBack)
                 Frame.GoBack();
         }
-        
+
     }
 }

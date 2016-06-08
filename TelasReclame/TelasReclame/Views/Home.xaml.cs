@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TelasReclame.Models;
+using TelasReclame.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -28,19 +29,20 @@ namespace TelasReclame.Views
 
         // Propriedades
         App myApp { get; set; }        
+        HomeViewModel ViewModel { get; set; } 
+
 
         public Home()
         {
-            this.InitializeComponent();
-            myApp = (App)App.Current;
-            DataContext = myApp.AppReclamacoes;
+            this.InitializeComponent();           
+            ViewModel = new HomeViewModel();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-            if (myApp.AppReclamacoes.Reclamacoes.Count > 0)
+            if (ViewModel.Reclamacoes.Count > 0)
             {
                 TextoZeroReclamacoes.Visibility = Visibility.Collapsed;
                 ViewReclamacoes.Visibility = Visibility.Visible;                
@@ -67,7 +69,12 @@ namespace TelasReclame.Views
         private void ListViewReclamacoes_ItemClick(object sender, ItemClickEventArgs e)
         {
             int id = ((Reclamacao)e.ClickedItem).Id;
-            Frame.Navigate(typeof(ViewReclamacao), id);
+            Frame.Navigate(typeof(DetalhesReclamacao), id);
+        }
+
+        private void ListViewReclamacoes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

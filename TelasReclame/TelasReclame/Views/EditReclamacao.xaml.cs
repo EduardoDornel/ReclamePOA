@@ -30,10 +30,22 @@ namespace TelasReclame.Views
     public sealed partial class EditReclamacao : Page
     {
 
+        // Propriedades
         public EditReclamacaoViewModel ViewModel { get; set; }
         public BitmapImage ImagemPadrao { get; set; }
         App myApp = (App)App.Current;
         bool DeletarArquivo { get; set; }
+
+        // Construtores
+        public EditReclamacao()
+        {
+            this.InitializeComponent();
+            ViewModel = new EditReclamacaoViewModel();
+            DataContext = ViewModel;
+            ImagemPadrao = new BitmapImage(new Uri(this.BaseUri, "/Assets/nopicdefault.png"));
+        }
+
+        // Métodos
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -49,10 +61,10 @@ namespace TelasReclame.Views
                 this.ViewModel.ReclamacaoTemporaria = new Reclamacao()
                 {
                     Id = reclamacao.Id,
+                    Criador = reclamacao.Criador,
                     Bairro = reclamacao.Bairro,
                     Categoria = reclamacao.Categoria,
                     Curtidas = reclamacao.Curtidas,
-                    QtdCurtidas = reclamacao.QtdCurtidas,
                     DataCriacao = reclamacao.DataCriacao,
                     DataResolucao = reclamacao.DataResolucao,
                     Descricao = reclamacao.Descricao,
@@ -70,15 +82,6 @@ namespace TelasReclame.Views
             }
 
         }
-
-        public EditReclamacao()
-        {
-            this.InitializeComponent();
-            ViewModel = new EditReclamacaoViewModel();
-            DataContext = ViewModel;
-            ImagemPadrao = new BitmapImage(new Uri(this.BaseUri, "/Assets/nopicdefault.png"));
-        }
-
 
         private async void ImagePickerButton_Click(object sender, RoutedEventArgs e)
         {
@@ -103,8 +106,14 @@ namespace TelasReclame.Views
                 BitmapImage imageBitmap = new BitmapImage(imageUri);
                 ImagemRetangulo.Source = imageBitmap;
             }
-
         }
+
+        private void RemoveImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.ReclamacaoTemporaria.URLImagem = null;
+            ImagemRetangulo.Source = ImagemPadrao;
+        }
+
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             App myApp = (App)App.Current;
@@ -112,7 +121,7 @@ namespace TelasReclame.Views
             myApp.AppReclamacoes.Reclamacoes[posicaoAlterado] = ViewModel.ReclamacaoTemporaria;
             bool ok = await myApp.AppReclamacoes.Save();
             if (ok)
-            {                                
+            {
                 this.Frame.GoBack();
             }
             else
@@ -129,14 +138,8 @@ namespace TelasReclame.Views
                 Frame.GoBack();
         }
 
-        private void RemoveImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.ReclamacaoTemporaria.URLImagem = null;
-            ImagemRetangulo.Source = ImagemPadrao;
-        }
-
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {            
+        {
 
             var confirmDialog = new MessageDialog("Deseja realmante excluir a reclamação?");
             confirmDialog.Commands.Add(new UICommand("Sim", (command) =>

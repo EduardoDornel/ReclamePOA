@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     >
 
-    <DataTemplate x:Key="TemplateReclamacao">
+    <!--<DataTemplate x:Key="TemplateReclamacao">
         <RelativePanel Background="Orange" Margin="0,12" MaxHeight="150">
             <Rectangle x:Name="ReclamacaoFigure" Width="150" Height="150">
                 <Rectangle.Fill>
@@ -13,7 +13,7 @@
             <TextBlock x:Name="IconCategoria"
                            Text="&#xE8EC;" FontFamily="Segoe MDL2 Assets" FontSize="16"
                            Margin="8" RelativePanel.RightOf="ReclamacaoFigure"/>
-            <TextBlock x:Name="LabelCategoria"  Text="{Binding Categoria}"
+            <TextBlock x:Name="LabelCategoria"  Text="{x:Bind ViewModel.Categoria}"
                            FontSize="16" FontWeight="Bold"
                            RelativePanel.RightOf="IconCategoria" 
                            RelativePanel.AlignVerticalCenterWith="IconCategoria"/>
@@ -35,7 +35,7 @@
                        Margin="8"
                        RelativePanel.AlignLeftWith="IconCategoria"                       
                        RelativePanel.Below="IconCategoria"/>
-            <TextBlock x:Name="LabelBairro" Text="{Binding Bairro}"
+            <TextBlock x:Name="LabelBairro" Text="{x:Bind ViewModel.Bairro}"
                        FontSize="16" FontWeight="Bold"
                        RelativePanel.RightOf="IconBairro" 
                        RelativePanel.AlignVerticalCenterWith="IconBairro"/>
@@ -44,7 +44,7 @@
                        Margin="8"                       
                        RelativePanel.AlignBottomWithPanel="True"
                        RelativePanel.AlignLeftWith="IconCategoria" />
-            <TextBlock x:Name="LabelCurtidas" Text="{Binding QtdCurtidas}"
+            <TextBlock x:Name="LabelCurtidas" Text="{x:Bind ViewModel.QtdCurtidas}"
                        FontSize="16" FontWeight="Bold"                       
                        RelativePanel.RightOf="IconCategoria"
                        RelativePanel.AlignVerticalCenterWith="IconCurtidas"/>
@@ -55,12 +55,12 @@
                        RelativePanel.LeftOf="LabelDataCriacao"
                        />
             <TextBlock x:Name="LabelDataCriacao"
-                       Text="{Binding DataCriacao}"
+                       Text="{x:Bind ViewModel.DataCriacao}"
                        Margin="8"
                        RelativePanel.AlignBottomWithPanel="True"
                        RelativePanel.AlignRightWithPanel="True"
                        />
         </RelativePanel>
-    </DataTemplate>
+    </DataTemplate>-->
 
 </ResourceDictionary>

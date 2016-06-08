@@ -7,52 +7,68 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+
+        <RelativePanel x:Name="TopBar"
+                           Background="Gold"
+                           Height="48">
+            <TextBlock x:Name="PageName"
+                           FontSize="24"                       
+                           RelativePanel.AlignVerticalCenterWithPanel="True"
+                           Padding="20,0,0,0">
+                    <Run Text="Reclamação de" />
+                    <Run Text="{x:Bind ViewModel.ReclamacaoAtual.Criador.Nome}" />
+            </TextBlock>
+            <AppBarButton x:Name="ButtonEditReclamacao"
+                              Icon="Edit"
+                              Click="EditReclamacao_Click"
+                              RelativePanel.AlignRightWithPanel="True"/>
+        </RelativePanel>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
             <RelativePanel ScrollViewer.VerticalScrollMode="Auto">
-                <Image x:Name="ComplaintImage" Height="250" Source="{Binding ReclamacaoAtual.URLImagem}" Stretch="UniformToFill"/>
-                <TextBlock x:Name="ComplaintCategory"
-                   Text="{Binding ReclamacaoAtual.Categoria}"
-                   FontSize="32"
-                   Margin="12,4"                   
-                   RelativePanel.Below="ComplaintImage"
-                   />
+                <Image x:Name="ReclamacaoImage" Height="250" Source="{x:Bind ViewModel.ReclamacaoAtual.URLImagem}" Stretch="UniformToFill"/>
+                <TextBlock x:Name="ReclamacaoCategory"
+                       Text="{x:Bind ViewModel.ReclamacaoAtual.Categoria}"                                                              
+                       FontSize="32"
+                       Margin="12,4"                   
+                       RelativePanel.Below="ReclamacaoImage"
+                       />
                 <ToggleButton x:Name="ToggleLike"                              
-                              RelativePanel.Below="ComplaintImage"
-                              RelativePanel.AlignRightWithPanel="True"                              
-                              Margin="12"                              
-                              Checked="ToggleLike_Checked"
-                              Unchecked="ToggleLike_Unchecked">
+                                  RelativePanel.Below="ReclamacaoImage"
+                                  RelativePanel.AlignRightWithPanel="True"                              
+                                  Margin="12"                              
+                                  Checked="ToggleLike_Checked"
+                                  Unchecked="ToggleLike_Unchecked">
                     <StackPanel Orientation="Horizontal">
                         <SymbolIcon x:Name="IconeLike" Symbol="Like" />
-                        <TextBlock x:Name="NumeroLike" Text="{Binding ReclamacaoAtual.QtdCurtidas}" Padding="12,0,0,0"/>
+                        <TextBlock x:Name="NumeroLike" Padding="12,0,0,0">
+                                <Run Text="{x:Bind ViewModel.ReclamacaoAtual.QtdCurtidas}" />
+                                <Run Text="curtidas" />
+                        </TextBlock>
                     </StackPanel>
                 </ToggleButton>
-                <TextBlock x:Name="ComplaintBairro"
-                   Text="{Binding ReclamacaoAtual.Bairro}"
-                   FontSize="18"
-                   Margin="12,0,12,8"
-                   RelativePanel.Below="ComplaintCategory"/>
-                <TextBlock x:Name="ComplaintDescription"
-                   Text="{Binding ReclamacaoAtual.Descricao}"
-                   TextWrapping="WrapWholeWords"
-                   Margin="12,0,12,8"
-                   RelativePanel.Below="ComplaintBairro"
-                   />
-                <ListBox RelativePanel.Below="ComplaintDescription"/>
+                <TextBlock x:Name="ReclamacaoBairro"                   
+                       FontSize="18"
+                       Margin="12,0,12,8"
+                       RelativePanel.Below="ReclamacaoCategory">
+                        <Run Text="No bairro" />
+                        <Run Text="{x:Bind ViewModel.ReclamacaoAtual.Bairro}" FontWeight="Bold"/>
+                </TextBlock>
+                <TextBlock x:Name="ReclamacaoDescricao"
+                               Text="{x:Bind ViewModel.ReclamacaoAtual.Descricao}"
+                               TextWrapping="WrapWholeWords"
+                               MinHeight="100"
+                               Margin="12,0,12,8"
+                               RelativePanel.Below="ReclamacaoBairro"
+                       />
+                <ListBox RelativePanel.Below="ReclamacaoDescricao"/>
             </RelativePanel>
         </ScrollViewer>
-        <CommandBar Grid.Row="2">
-            <AppBarButton x:Name="EditComplaint"
-                          Icon="Edit"
-                          Click="EditComplaint_Click"/>
-            <AppBarButton x:Name="AddComment"
-                          Icon="Comment"/>
-        </CommandBar>
     </Grid>
 </Page>
