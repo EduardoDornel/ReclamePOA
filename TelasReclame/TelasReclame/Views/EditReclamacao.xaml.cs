@@ -53,10 +53,10 @@ namespace TelasReclame.Views
             if (e.Parameter != null)
             {
                 int id = Convert.ToInt32(e.Parameter);
-                App minhaApp = (App)App.Current;
-                var reclamacao = (from f in minhaApp.AppReclamacoes.Reclamacoes
-                                  where f.Id == id
-                                  select f).FirstOrDefault();
+                App myApp = (App)App.Current;
+                var reclamacao = (from r in myApp.AppReclamacoes.Reclamacoes
+                                  where r.Id == id
+                                  select r).FirstOrDefault();
                 this.ViewModel.ReclamacaoAtual = reclamacao;
                 this.ViewModel.ReclamacaoTemporaria = new Reclamacao()
                 {
@@ -110,7 +110,7 @@ namespace TelasReclame.Views
 
         private void RemoveImageButton_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.ReclamacaoTemporaria.URLImagem = null;
+            ViewModel.ReclamacaoTemporaria.URLImagem = "ms-appx:///Assets/nopicdefault.png";
             ImagemRetangulo.Source = ImagemPadrao;
         }
 
@@ -159,8 +159,10 @@ namespace TelasReclame.Views
 
             {
                 var reclamacaoRemovida = ViewModel.ReclamacaoAtual;
-                var posicaoRemocao = myApp.AppReclamacoes.Reclamacoes.FindIndex(p => p.Id == reclamacaoRemovida.Id);
+                var posicaoRemocao = myApp.AppReclamacoes.Reclamacoes.FindIndex(r => r.Id == reclamacaoRemovida.Id);
                 myApp.AppReclamacoes.Reclamacoes.RemoveAt(posicaoRemocao);
+                myApp.AppComentarios.Comentarios.RemoveAll(r => r.Reclamacao.Id == reclamacaoRemovida.Id);
+                await myApp.AppComentarios.Save();
                 bool ok = await myApp.AppReclamacoes.Save();
                 if (ok)
                 {

@@ -71,14 +71,14 @@ namespace TelasReclame
             }
 
 
-            bool jaExisteComentario = await StorageHelper.FileExistsAsync("Comentario.json");
+            bool jaExisteComentario = await StorageHelper.FileExistsAsync("Comentarios.json");
             if (!jaExisteComentario)
             {
-                await AppUsuarios.Save();
+                await AppComentarios.Save();
             }
             else
             {
-                await AppUsuarios.Load();
+                await AppComentarios.Load();
             }
 
 

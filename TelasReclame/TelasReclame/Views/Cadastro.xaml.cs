@@ -55,14 +55,11 @@ namespace TelasReclame.Views
                 string.IsNullOrWhiteSpace(PasswordBoxSenha.Password) ||
                 string.IsNullOrWhiteSpace(PasswordBoxRepeteSenha.Password) ||
                 ComboBoxBairros.SelectedIndex <= -1)
-            {
-                erro = 1; // Campos em branco
-            }
-            else if(!PasswordBoxSenha.Password.Equals(PasswordBoxRepeteSenha.Password))
-            {
-                erro = 2; // Senhas não conferem
-            }
-
+                erro = 1; // Campos em branco            
+            else if (!PasswordBoxSenha.Password.Equals(PasswordBoxRepeteSenha.Password))
+                erro = 2; // Senhas não conferem            
+            else if (ViewModel.ExisteUsuarioEmail(TextBoxEmail.Text))
+                erro = 3;
             switch(erro)
             {
                 case 1:
@@ -72,6 +69,10 @@ namespace TelasReclame.Views
                 case 2:
                     var dialog2 = new MessageDialog("As senhas digitadas não conferem.");
                     await dialog2.ShowAsync();
+                    break;
+                case 3:
+                    var dialog3 = new MessageDialog("Já existe usuário com este e-mail.");
+                    await dialog3.ShowAsync();
                     break;
                 default:
                     App myApp = (App)App.Current;

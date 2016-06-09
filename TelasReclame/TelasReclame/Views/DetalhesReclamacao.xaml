@@ -5,7 +5,36 @@
     xmlns:local="using:TelasReclame.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:TelasReclame.Models"
     mc:Ignorable="d">
+    <Page.Resources>
+        <DataTemplate x:Key="TemplateComentarios"
+                      x:DataType="data:Comentario">
+            <RelativePanel Background="#33000000"                           
+                           Margin="-12,0,-12,0">
+                <RelativePanel x:Name="PanelCommentInfo" Background="#33000000"
+                               RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignRightWithPanel="True">
+                    <SymbolIcon x:Name="IconUser" Symbol="Contact"
+                                Margin="8"/>
+                    <TextBlock x:Name="LabelUser" FontSize="16" Text="{x:Bind Usuario.Nome}"
+                               RelativePanel.RightOf="IconUser"
+                               Margin="0,8"/>
+                    <TextBlock x:Name="LabelData" Text="{x:Bind Data}"
+                               RelativePanel.AlignRightWithPanel="True"
+                               Margin="8"/>
+                    <SymbolIcon x:Name="IconData" Symbol="CalendarDay"
+                                RelativePanel.LeftOf="LabelData"
+                                Margin="8"/>
+                </RelativePanel>
+                <TextBlock x:Name="TextBlockTexto" Text="{x:Bind Texto}"                           
+                           MinHeight="100" TextWrapping="Wrap"
+                           RelativePanel.Below="PanelCommentInfo"
+                           RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.AlignRightWithPanel="True"/>
+            </RelativePanel>
+        </DataTemplate>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -16,7 +45,140 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Frame x:Name="FrameViewReclamacao" Grid.RowSpan="2" Grid.Column="0"/>
-        <Frame x:Name="FrameViewComentarios" Grid.RowSpan="2" Grid.Column="1"/>
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+              Grid.RowSpan="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <RelativePanel x:Name="TopBar"
+                           Background="Gold"
+                           Height="48">
+                <TextBlock x:Name="PageName"
+                           FontSize="24"                       
+                           RelativePanel.AlignVerticalCenterWithPanel="True"
+                           Padding="20,0,0,0">
+                    <Run Text="Reclamação de" />
+                    <Run Text="{x:Bind ViewModel.ReclamacaoAtual.Criador.Nome}" />
+                </TextBlock>
+                <AppBarButton x:Name="ButtonEditReclamacao"
+                              Icon="Edit"
+                              Click="EditReclamacao_Click"
+                              RelativePanel.AlignRightWithPanel="True"/>
+            </RelativePanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                <RelativePanel ScrollViewer.VerticalScrollMode="Auto">
+                    <Image x:Name="ReclamacaoImage" Height="250" Source="{x:Bind ViewModel.ReclamacaoAtual.URLImagem}" Stretch="UniformToFill"/>
+                    <TextBlock x:Name="ReclamacaoCategory"
+                       Text="{x:Bind ViewModel.ReclamacaoAtual.Categoria}"                                                              
+                       FontSize="32"
+                       Margin="12,4"                   
+                       RelativePanel.Below="ReclamacaoImage"
+                       />
+                    <ToggleButton x:Name="ToggleLike"                              
+                                  RelativePanel.Below="ReclamacaoImage"
+                                  RelativePanel.AlignRightWithPanel="True"                              
+                                  Margin="12"                              
+                                  Checked="ToggleLike_Checked"
+                                  Unchecked="ToggleLike_Unchecked">
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon x:Name="IconeLike" Symbol="Like" />
+                            <TextBlock x:Name="NumeroLike" Padding="12,0,0,0">
+                                <Run Text="{x:Bind ViewModel.ReclamacaoAtual.QtdCurtidas}" />
+                                <Run Text="curtidas" />
+                            </TextBlock>
+                        </StackPanel>
+                    </ToggleButton>
+                    <TextBlock x:Name="ReclamacaoBairro"                   
+                       FontSize="18"
+                       Margin="12,0,12,8"
+                       RelativePanel.Below="ReclamacaoCategory">
+                        <Run Text="No bairro" />
+                        <Run Text="{x:Bind ViewModel.ReclamacaoAtual.Bairro}" FontWeight="Bold"/>
+                    </TextBlock>
+                    <TextBlock x:Name="ReclamacaoDescricao"
+                               Text="{x:Bind ViewModel.ReclamacaoAtual.Descricao}"
+                               TextWrapping="WrapWholeWords"
+                               MinHeight="100"
+                               Margin="12,0,12,8"
+                               RelativePanel.Below="ReclamacaoBairro"
+                       />
+                    <ListBox RelativePanel.Below="ReclamacaoDescricao"/>
+                </RelativePanel>
+            </ScrollViewer>
+        </Grid>
+        <Grid Background="#EEEEEE"
+              Grid.RowSpan="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <RelativePanel x:Name="TopBarComment"
+                       Background="#EEEEEE"
+                       Height="48">
+                <TextBlock x:Name="PageNameComment"                           
+                           FontSize="24"
+                           Text="Comentários"                                                      
+                           RelativePanel.AlignVerticalCenterWithPanel="True"
+                           Padding="20,0,0,0">
+                </TextBlock>
+                <AppBarButton x:Name="ButtonShowCommentBox"
+                          Icon="Message"
+                          Click="ButtonShowCommentBox_Click"
+                          IsCompact="True"
+                          RelativePanel.AlignRightWithPanel="True"/>
+            </RelativePanel>
+            <RelativePanel x:Name="PanelComentario"
+                           Grid.Row="1"                           
+                           Background="#EEEEEE"
+                           Visibility="Collapsed">
+                <TextBox x:Name="TextBoxComentario"                         
+                         MaxLength="300"
+                         TextWrapping="Wrap"
+                         Margin="12"                     
+                         RelativePanel.AlignLeftWithPanel="True"
+                         RelativePanel.AlignRightWithPanel="True"/>
+                <Button x:Name="ButtonSendComment"
+                    RelativePanel.Below="TextBoxComentario"
+                    RelativePanel.AlignRightWith="TextBoxComentario"
+                    Margin="0,0,12,12"
+                    Click="ButtonSendComment_Click">
+                    <RelativePanel>
+                        <SymbolIcon x:Name="ComentarIcon"
+                                Symbol="Send"
+                                Margin="0,0,8,0"/>
+                        <TextBlock Text="Comentar"
+                               RelativePanel.RightOf="ComentarIcon"/>
+                    </RelativePanel>
+                </Button>
+            </RelativePanel>
+            <RelativePanel Grid.Row="2">
+                <TextBlock x:Name="TextBlockZeroComentarios"
+                           Text="Não há comentários."
+                           FontSize="28"
+                           TextWrapping="Wrap"                           
+                           TextAlignment="Center"
+                           Margin="8" FontWeight="SemiBold"
+                           RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.AlignRightWithPanel="True"/>
+            </RelativePanel>
+            <ScrollViewer x:Name="ScrollViewComentarios"
+                          VerticalScrollBarVisibility="Auto"
+                          Grid.Row="2"
+                          Visibility="Collapsed">
+                <ListView x:Name="ListViewComentarios"
+                          ItemTemplate="{StaticResource TemplateComentarios}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment"
+                                Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Page>

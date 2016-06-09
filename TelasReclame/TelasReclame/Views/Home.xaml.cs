@@ -51,9 +51,7 @@ namespace TelasReclame.Views
             {
                 TextoZeroReclamacoes.Visibility = Visibility.Visible;
                 ViewReclamacoes.Visibility = Visibility.Collapsed;
-            }
-
-
+            }            
         }        
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)

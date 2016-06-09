@@ -39,6 +39,7 @@ namespace TelasReclame.Views
         {
             this.InitializeComponent();
             ViewModel = new AddReclamacaoViewModel();
+            ViewModel.ReclamacaoAtual.URLImagem = "ms-appx:///Assets/nopicdefault.png";
             DataContext = ViewModel;
             ImagemPadrao = new BitmapImage(new Uri(this.BaseUri, "/Assets/nopicdefault.png"));
         }
@@ -80,7 +81,7 @@ namespace TelasReclame.Views
         // Remove imagem já adicionada
         private void RemoveImageButton_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.ReclamacaoAtual.URLImagem = null;
+            ViewModel.ReclamacaoAtual.URLImagem = "ms-appx:///Assets/nopicdefault.png";
             ImagemRetangulo.Source = ImagemPadrao;
         }
 
@@ -98,8 +99,7 @@ namespace TelasReclame.Views
             }
             else
             {
-                ViewModel.ReclamacaoAtual.DataCriacao = DateTime.Now;
-                ViewModel.ReclamacaoAtual.URLImagem = "ms-appx:///Assets/nopicdefault.png";
+                ViewModel.ReclamacaoAtual.DataCriacao = DateTime.Now;                
                 myApp.AppReclamacoes.Reclamacoes.Add(ViewModel.ReclamacaoAtual);
                 bool ok = await myApp.AppReclamacoes.Save();
                 if (ok)

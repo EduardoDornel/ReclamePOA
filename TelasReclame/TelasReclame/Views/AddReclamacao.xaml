@@ -34,7 +34,7 @@
                           SelectedItem="{Binding ReclamacaoAtual.Categoria, Mode=TwoWay}"
                           />
                 <ComboBox x:Name="ListBairro" Header="Bairro"
-                          MaxWidth="300" Margin="12,12,0,0"
+                          Width="230" Margin="12,12,0,0"
                           VerticalContentAlignment="Stretch"
                           ItemsSource="{Binding Bairros}"
                           SelectedItem="{Binding ReclamacaoAtual.Bairro, Mode=TwoWay}"
@@ -42,7 +42,7 @@
                           />
                 <TextBox x:Name="TextBoxEndereco" Header="Endereco"
                          Text="{Binding ReclamacaoAtual.Endereco, Mode=TwoWay}" 
-                         Margin="12,12,12,0" MaxWidth="320"
+                         Margin="12,12,12,0" Width="320"
                          RelativePanel.Below="ListBairro"/>
                 <TextBox x:Name="TextBoxDescricao" Header="Descrição"
                          Text="{Binding ReclamacaoAtual.Descricao, Mode=TwoWay}"

@@ -10,8 +10,8 @@ namespace TelasReclame.Models
     public class Comentario
     {
         public int ComentarioId { get; set; }
-        public string Texto { get; set; }
-        public string URLImagem { get; set; }
+        public string Texto { get; set; }        
+        public DateTime Data { get; set; }
         public Reclamacao Reclamacao { get; set; }
         public Usuario Usuario { get; set; }
     }

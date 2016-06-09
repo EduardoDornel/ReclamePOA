@@ -28,6 +28,16 @@ namespace TelasReclame.Models
         }
         public DateTime DataCriacao { get; set; }
         public bool estaResolvida { get; set; }
+        public string TextoResolvida
+        {
+            get
+            {
+                if (estaResolvida)
+                    return "Resolvida";
+                else
+                    return "Não Resolvida";
+            }
+        }
         public DateTime DataResolucao { get; set; }
 
         // Construtor

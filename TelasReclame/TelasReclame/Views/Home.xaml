@@ -11,7 +11,7 @@
     <Page.Resources>
 
         <DataTemplate x:Key="TemplateReclamacao" x:DataType="data:Reclamacao">
-            <RelativePanel Background="Orange" Margin="0,12" MaxHeight="150">
+            <RelativePanel Background="Orange" Margin="4,12" MaxHeight="150">
                 <Rectangle x:Name="ReclamacaoFigure" Width="150" Height="150">
                     <Rectangle.Fill>
                         <ImageBrush Stretch="UniformToFill" ImageSource="{Binding URLImagem}"/>
@@ -24,19 +24,12 @@
                            FontSize="16" FontWeight="Bold"
                            RelativePanel.RightOf="IconCategoria" 
                            RelativePanel.AlignVerticalCenterWith="IconCategoria"/>
-                <Border BorderThickness="2"                    
-                    BorderBrush="Red"
-                    CornerRadius="5"
-                    Padding="3"
-                    RelativePanel.AlignRightWithPanel="True"
-                    Margin="8"
-                    >
-                    <TextBlock x:Name="LabelEstaResolvido"
-                           Text="Não Resolvido"
-                           Foreground="Red"
-                           FontSize="16" FontWeight="Bold"                           
+                <TextBlock x:Name="LabelEstaResolvido"                                                     
+                           FontSize="16" FontWeight="Bold"                                                      
+                           Text="{x:Bind TextoResolvida}"
+                           RelativePanel.AlignRightWithPanel="True"
+                           Margin="8"
                            />
-                </Border>
                 <TextBlock x:Name="IconBairro"
                        Text="&#xE707;" FontFamily="Segoe MDL2 Assets" FontSize="16"
                        Margin="8"
@@ -46,27 +39,30 @@
                        FontSize="16" FontWeight="Bold"
                        RelativePanel.RightOf="IconBairro" 
                        RelativePanel.AlignVerticalCenterWith="IconBairro"/>
-                <TextBlock x:Name="IconCurtidas"
+                <RelativePanel Background="#33000000"
+                               RelativePanel.AlignBottomWithPanel="True"
+                               RelativePanel.RightOf="ReclamacaoFigure"
+                               RelativePanel.AlignRightWithPanel="True">
+                    <TextBlock x:Name="IconCurtidas"
                        Text="&#xE8E1;" FontFamily="Segoe MDL2 Assets" FontSize="16"
-                       Margin="8"                       
-                       RelativePanel.AlignBottomWithPanel="True"
-                       RelativePanel.AlignLeftWith="IconCategoria" />
-                <TextBlock x:Name="LabelCurtidas" Text="{x:Bind QtdCurtidas}"
-                       FontSize="16" FontWeight="Bold"                       
-                       RelativePanel.RightOf="IconCategoria"
-                       RelativePanel.AlignVerticalCenterWith="IconCurtidas"/>
-                <TextBlock x:Name="IconDataCriacao"
+                       Margin="8"/>
+                    <TextBlock x:Name="LabelCurtidas" Text="{x:Bind QtdCurtidas}"
+                               FontSize="16" FontWeight="Bold" 
+                               RelativePanel.RightOf="IconCurtidas"
+                               RelativePanel.AlignVerticalCenterWith="IconCurtidas"/>
+                    <TextBlock x:Name="IconDataCriacao"
                        Text="&#xE8BF;" FontFamily="Segoe MDL2 Assets" FontSize="16"
                        Margin="8"
                        RelativePanel.AlignBottomWithPanel="True"
                        RelativePanel.LeftOf="LabelDataCriacao"
                        />
-                <TextBlock x:Name="LabelDataCriacao"
+                    <TextBlock x:Name="LabelDataCriacao"
                        Text="{x:Bind DataCriacao}"
                        Margin="8"
                        RelativePanel.AlignBottomWithPanel="True"
                        RelativePanel.AlignRightWithPanel="True"
                        />
+                </RelativePanel>
             </RelativePanel>
         </DataTemplate>
     </Page.Resources>
@@ -100,10 +96,14 @@
         </StackPanel>
 
         <!--Content-->
-        <ScrollViewer x:Name="ViewReclamacoes" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="ViewReclamacoes" Grid.Row="1"                      
+                      VerticalScrollBarVisibility="Auto">
             <ListView x:Name="ListViewReclamacoes" ItemsSource="{x:Bind ViewModel.Reclamacoes}"                      
                       SelectionMode="None" IsItemClickEnabled="True"                      
-                      ItemClick="ListViewReclamacoes_ItemClick" SelectionChanged="ListViewReclamacoes_SelectionChanged" ItemTemplate="{StaticResource TemplateReclamacao}">
+                      ItemClick="ListViewReclamacoes_ItemClick"
+                      SelectionChanged="ListViewReclamacoes_SelectionChanged"
+                      ItemTemplate="{StaticResource TemplateReclamacao}"
+                      Background="Yellow">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment"
