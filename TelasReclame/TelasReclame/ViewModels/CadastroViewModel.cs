@@ -25,7 +25,11 @@ namespace TelasReclame.ViewModels
             Bairros = PreencheDados.Bairros();
             // Gera a ID do usuário logo após que a instância for criada de acordo com a lista principal de usuários.
             App myApp = (App)App.Current;
-            UsuarioNovo.Id = myApp.AppUsuarios.Usuarios.Count;
+            int numeroElementos = myApp.AppUsuarios.Usuarios.Count;
+            if (numeroElementos == 0)
+                UsuarioNovo.Id = 1;
+            else
+                UsuarioNovo.Id = myApp.AppUsuarios.Usuarios[numeroElementos - 1].Id++;            
         }
 
         // Métodos

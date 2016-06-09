@@ -26,7 +26,11 @@ namespace TelasReclame.ViewModels
             Bairros = PreencheDados.Bairros();
             // Gera a ID e Criador da reclamação logo após que a instância for criada de acordo com a lista principal de reclamações.
             var myApp = (App)App.Current;
-            ReclamacaoAtual.Id = myApp.AppReclamacoes.Reclamacoes.Count;
+            int numeroElementos = myApp.AppReclamacoes.Reclamacoes.Count;
+            if (numeroElementos == 0)
+                ReclamacaoAtual.Id = 1;
+            else
+                ReclamacaoAtual.Id = myApp.AppReclamacoes.Reclamacoes[numeroElementos - 1].Id++;
             ReclamacaoAtual.Criador = myApp.UsuarioLogado;
 
 

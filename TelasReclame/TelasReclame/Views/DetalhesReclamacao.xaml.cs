@@ -132,15 +132,19 @@ namespace TelasReclame.Views
         }
 
         private async void ButtonSendComment_Click(object sender, RoutedEventArgs e)
-        {
+        {          
             Comentario novoComentario = new Comentario()
-            {
-                ComentarioId = myApp.AppComentarios.Comentarios.Count(),
+            {                
                 Data = DateTime.Now,
                 Texto = TextBoxComentario.Text,
                 Reclamacao = ViewModel.ReclamacaoAtual,
                 Usuario = myApp.UsuarioLogado
             };
+            int numeroElementos = myApp.AppComentarios.Comentarios.Count;
+            if (numeroElementos == 0)
+                novoComentario.ComentarioId = 1;
+            else
+                novoComentario.ComentarioId = myApp.AppComentarios.Comentarios[numeroElementos - 1].ComentarioId++;
             myApp.AppComentarios.Comentarios.Add(novoComentario);
             bool ok = await myApp.AppComentarios.Save();
             if (!ok)
